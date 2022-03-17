@@ -24,15 +24,27 @@ router.get("/register", async (req, res) => {
 
 //REGISTRERA ADMIN
 router.post("/register", async (req, res) => {
-  const { adminUsername, adminPassword } = req.body;
+  const { adminUsername, adminPassword, adminPasswordConfirm } = req.body;
 
-  const newAdmin = new AdminModel({
-    adminUsername,
-    adminPassword: utils.getHashedPassword(adminPassword),
+  AdminModel.findOne({ adminUsername }, async (err, admin) => {
+    if (admin) {
+      res.send("TAKEN");
+    } else if (adminUsername.length < 6) {
+      res.send("ADMIN USERNAME NEEDS TO BE MORE THAN 6");
+    } else if (adminPassword !== adminPasswordConfirm) {
+      res.send("NOT MATCHING PASSWORDS");
+    } else if (adminPassword.length < 8) {
+      res.send("PASSWORDS NEED TO HAVE A LENGTH OF 8");
+    } else {
+      const newAdmin = new AdminModel({
+        adminUsername,
+        adminPassword: utils.getHashedPassword(adminPassword),
+      });
+
+      await newAdmin.save();
+      res.sendStatus(200);
+    }
   });
-
-  await newAdmin.save();
-  res.sendStatus(200);
 });
 
 // ADMIN LOG IN

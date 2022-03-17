@@ -9,7 +9,6 @@ const adminSchema = new Schema({
     type: String,
     required: true,
   },
-
   ifAdmin: {
     type: Boolean,
     default: true,

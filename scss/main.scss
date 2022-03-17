@@ -3,3 +3,10 @@
 @import "./elements/header";
 
 @import "./elements/footer";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: cursive;
+}
