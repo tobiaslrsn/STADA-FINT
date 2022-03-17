@@ -1,6 +1,13 @@
 <h2>Registrera konto</h2>
 
-<form action="/register-customer" method="post">
+<form
+  {{#if customer}}
+    action="/registrera-kund"
+  {{else}}
+    action="/registrera-stadare"
+  {{/if}}
+  method="post"
+>
   <input type="text" name="email" placeholder="E-post" /><br />
   <input type="password" name="password" placeholder="Lösenord" /><br />
   <input

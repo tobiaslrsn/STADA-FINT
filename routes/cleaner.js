@@ -1,14 +1,14 @@
 const express = require("express");
 const utils = require("../utils");
-const CustomersModel = require("../models/CustomersModel");
+const CleanersModel = require("../models/CleanersModel");
 
 const router = express.Router();
 
-router.get("/registrera-konto", (req, res) => {
-  res.render("accounts/register", { customer: true });
+router.get("/registrera-stadare", (req, res) => {
+  res.render("accounts/register");
 });
 
-router.post("/registrera-kund", async (req, res) => {
+router.post("/registrera-stadare", async (req, res) => {
   const {
     email,
     password,
@@ -20,13 +20,13 @@ router.post("/registrera-kund", async (req, res) => {
     city,
   } = req.body;
 
-  CustomersModel.findOne({ email }, async (err, customer) => {
-    if (customer) {
+  CleanersModel.findOne({ email }, async (err, cleaner) => {
+    if (cleaner) {
       res.send("E-post upptagen");
     } else if (password !== confirmPassword) {
       res.send("Lösenordet matchar inte");
     } else {
-      const newCustomer = new CustomersModel({
+      const newCleaner = new CleanersModel({
         email,
         password: utils.getHashedPassword(password),
         firstName,
@@ -36,7 +36,7 @@ router.post("/registrera-kund", async (req, res) => {
         city,
       });
 
-      await newCustomer.save();
+      await newCleaner.save();
 
       res.send("Konto registrerat");
     }

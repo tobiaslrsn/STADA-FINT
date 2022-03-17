@@ -8,6 +8,8 @@ const cookieParser = require("cookie-parser");
 
 // ROUTES
 const customerRoutes = require("./routes/customer");
+const cleanerRoutes = require("./routes/cleaner");
+
 // !ROUTES
 
 // MODELS
@@ -38,6 +40,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use(customerRoutes);
+app.use(cleanerRoutes);
 
 app.listen(8000, () => {
   console.log("/// RUNNING ON: http://localhost:8000");
