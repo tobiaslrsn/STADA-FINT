@@ -10,4 +10,4 @@ const forceAuthorize = (req, res, next) => {
   }
 };
 
-mocule.exports = { forceAuthorize };
+module.exports = { forceAuthorize };

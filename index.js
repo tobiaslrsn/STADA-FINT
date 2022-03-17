@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = "cookie-parser";
 
 // ROUTES
-
+const adminRoute = require("./routes/admin-route.js");
 // !ROUTES
 
 // MODELS
@@ -32,6 +32,8 @@ app.engine(
 app.set("view engine", "hbs");
 app.use(express.static("public"));
 // app.use(cookieParser());
+
+app.use("/admin", adminRoute);
 
 app.get("/", async (req, res) => {
   res.render("home");
