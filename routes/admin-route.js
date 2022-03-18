@@ -11,15 +11,14 @@ const { forceAuthorize } = require("../middlewares/auth.js");
 const { objectId } = require("mongodb");
 
 router.get("/register", async (req, res) => {
-  /*
   //HÅRKODAD ADMIN
-  const test = new AdminModel({
-     adminUsername: "admin007",
-    adminPassword: utils.getHashedPassword("admin002"),
+  /*   const test = new AdminModel({
+    adminUsername: "username",
+    adminPassword: utils.getHashedPassword("password"),
   });
   await test.save();
-  res.send(test); */
-  res.render("accounts/admin");
+  res.send(test);
+  res.render("accounts/admin"); */
 });
 
 //REGISTRERA ADMIN
