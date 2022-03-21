@@ -1,5 +1,5 @@
 require("dotenv").config();
-require("./mongoose.js");
+require("./mongoose");
 
 const express = require("express");
 const exphbs = require("express-handlebars");
@@ -8,18 +8,19 @@ const cookieParser = require("cookie-parser");
 
 // ROUTES
 const adminRoute = require("./routes/admin-route.js");
+const customerRoutes = require("./routes/customer");
+const cleanerRoutes = require("./routes/cleaner");
+
 // !ROUTES
 
 // MODELS
 const AdminModels = require("./models/AdminModels.js");
 const BookingModels = require("./models/BookingModels.js");
-const CleanerModels = require("./models/CleanerModels.js");
-const CustomersModels = require("./models/CustomersModels.js");
+const CleanerModels = require("./models/CleanersModel.js");
+const CustomersModels = require("./models/CustomersModel.js");
 // !MODELS
 
 const app = express();
-
-app.use(express.urlencoded({ extended: true }));
 
 app.engine(
   "hbs",
@@ -31,6 +32,7 @@ app.engine(
 
 app.set("view engine", "hbs");
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(async (req, res, next) => {
@@ -46,11 +48,13 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.use("/admin", adminRoute);
-
 app.get("/", async (req, res) => {
   res.render("home");
 });
+
+app.use("/admin", adminRoute);
+app.use(customerRoutes);
+app.use(cleanerRoutes);
 
 app.listen(8000, () => {
   console.log("/// RUNNING ON: http://localhost:8000");

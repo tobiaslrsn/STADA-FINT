@@ -1,0 +1,24 @@
+<h2>Registrera konto</h2>
+
+<form
+  {{#if customer}}
+    action="/registrera-kund"
+  {{else}}
+    action="/registrera-stadare"
+  {{/if}}
+  method="post"
+>
+  <input type="email" name="email" placeholder="E-post" /><br />
+  <input type="password" name="password" placeholder="Lösenord" /><br />
+  <input
+    type="password"
+    name="confirmPassword"
+    placeholder="Bekräfta lösenordet"
+  /><br />
+  <input type="text" name="firstName" placeholder="Förnamn" /><br />
+  <input type="text" name="lastName" placeholder="Efternamn" /><br />
+  <input type="text" name="streetName" placeholder="Gata" /><br />
+  <input type="text" name="postalCode" placeholder="Postnummer" />
+  <input type="text" name="city" placeholder="Ort" /><br />
+  <input type="submit" value="Registrera konto" />
+</form>
