@@ -4,9 +4,13 @@ const CleanersModel = require("../models/CleanersModel");
 
 const router = express.Router();
 
+// REGISTRATION VIEW
+
 router.get("/registrera-stadare", (req, res) => {
   res.render("accounts/register");
 });
+
+// REGISTER CLEANER
 
 router.post("/registrera-stadare", async (req, res) => {
   const {
@@ -36,9 +40,13 @@ router.post("/registrera-stadare", async (req, res) => {
         city,
       });
 
-      await newCleaner.save();
+      if (utils.validateRegistration(newCleaner)) {
+        await newCleaner.save();
 
-      res.send("Konto registrerat");
+        res.send("Konto registrerat");
+      } else {
+        res.send("Something went wrong");
+      }
     }
   });
 });

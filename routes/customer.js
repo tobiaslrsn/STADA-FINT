@@ -4,9 +4,13 @@ const CustomersModel = require("../models/CustomersModel");
 
 const router = express.Router();
 
+// REGISTRATION VIEW
+
 router.get("/registrera-konto", (req, res) => {
   res.render("accounts/register", { customer: true });
 });
+
+// REGISTER CUSTOMER
 
 router.post("/registrera-kund", async (req, res) => {
   const {
@@ -36,9 +40,13 @@ router.post("/registrera-kund", async (req, res) => {
         city,
       });
 
-      await newCustomer.save();
+      if (utils.validateRegistration(newCustomer)) {
+        await newCustomer.save();
 
-      res.send("Konto registrerat");
+        res.send("Konto registrerat");
+      } else {
+        res.send("Something went wrong");
+      }
     }
   });
 });
