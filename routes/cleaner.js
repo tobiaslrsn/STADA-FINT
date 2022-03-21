@@ -32,7 +32,7 @@ router.post("/registrera-stadare", async (req, res) => {
     } else {
       const newCleaner = new CleanersModel({
         email,
-        password: utils.getHashedPassword(password),
+        password: utils.hashedPassword(password),
         firstName,
         lastName,
         streetName,
