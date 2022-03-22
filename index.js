@@ -35,7 +35,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(async (req, res, next) => {
+/* app.use(async (req, res, next) => {
   const { token } = req.cookies;
 
   if (token && jwt.verify(token, process.env.JWTSECRET)) {
@@ -47,7 +47,7 @@ app.use(async (req, res, next) => {
   }
   next();
 });
-
+ */
 app.get("/", async (req, res) => {
   res.render("home");
 });
