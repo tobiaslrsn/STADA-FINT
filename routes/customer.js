@@ -32,7 +32,7 @@ router.post("/registrera-kund", async (req, res) => {
     } else {
       const newCustomer = new CustomersModel({
         email,
-        password: utils.getHashedPassword(password),
+        password: utils.hashedPassword(password),
         firstName,
         lastName,
         streetName,
