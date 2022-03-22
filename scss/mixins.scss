@@ -2,7 +2,7 @@
 
 //sm
 @mixin for-phone-only {
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     @content;
   }
 }

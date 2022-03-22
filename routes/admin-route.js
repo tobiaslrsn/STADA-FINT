@@ -17,8 +17,8 @@ router.get("/register", async (req, res) => {
     adminPassword: utils.getHashedPassword("password"),
   });
   await test.save();
-  res.send(test);
-  res.render("accounts/admin"); */
+  res.send(test);*/
+  res.render("accounts/admin");
 });
 
 //REGISTRERA ADMIN
