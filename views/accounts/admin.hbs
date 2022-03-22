@@ -1,6 +1,7 @@
 <h2>/// ADMIN</h2>
 
 <form action="/admin/register" method="post">
+  {{usernameLengthError}}
   <input type="text" name="adminUsername" placeholder="AnvändarID" /><br />
   <input type="password" name="adminPassword" placeholder="Lösenord" /><br />
   <input
