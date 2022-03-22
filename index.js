@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 const adminRoute = require("./routes/admin-route.js");
 const customerRoutes = require("./routes/customer");
 const cleanerRoutes = require("./routes/cleaner");
+const loginRoutes = require("./routes/login-route.js")
 
 // !ROUTES
 
@@ -41,7 +42,7 @@ app.use(cookieParser());
   if (token && jwt.verify(token, process.env.JWTSECRET)) {
     const tokenData = jwt.decode(token, process.env.JWTSECRET);
     res.locals.customerLoggedIn = true;
-    res.locals.customerId = tokenData.customerId;
+    res.locals.userId = tokenData.userId;
   } else {
     res.locals.customerLoggedIn = false;
   }
@@ -55,6 +56,7 @@ app.get("/", async (req, res) => {
 app.use("/admin", adminRoute);
 app.use(customerRoutes);
 app.use(cleanerRoutes);
+app.use(loginRoutes);
 
 app.listen(8000, () => {
   console.log("/// RUNNING ON: http://localhost:8000");
