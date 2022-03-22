@@ -46,10 +46,23 @@ function validateRegistration(account) {
   return valid;
 }
 
+// EMAIL VALIDATION
+
+function validateEmailAddress(input) {
+  // https://stackoverflow.com/a/59264110
+  var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
+  if (regex.test(input)) {
+    return 1;
+  } else {
+    return -1;
+  }
+}
+
 module.exports = {
   getHashedPassword,
   hashedPassword,
   comparePassword,
   validateUsername,
   validateRegistration,
+  validateEmailAddress,
 };
