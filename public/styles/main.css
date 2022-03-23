@@ -136,29 +136,38 @@
     transform: translate(-60%, -30%);
   }
 }
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+@media (max-width: 768px) {
+  .wrapper {
+    height: 100%;
+  }
+}
+
 .logo-container {
   display: flex;
-  position: absolute;
   width: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  top: 25;
-  margin: 1rem 0 2rem 0;
 }
 @media (max-width: 768px) {
   .logo-container {
-    position: relative;
-    margin-bottom: 2rem;
+    margin-top: 10rem;
   }
 }
 .logo-container img {
-  width: 5rem;
+  width: 4rem;
   margin: 1rem 0 2rem 0;
 }
 .logo-container h2 {
   line-height: 1.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #00b594;
   text-decoration: underline;
 }
@@ -174,7 +183,6 @@
   justify-content: space-evenly;
   align-items: center;
   flex-flow: row wrap;
-  height: 100%;
   width: 100%;
   margin-top: 5%;
 }
