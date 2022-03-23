@@ -6,7 +6,7 @@
 <div class="services-container">
   <div class="service">
     <img src="/assets/Kund.png" alt="Kund portal" />
-    <a href="/registrera-konto">Kund</a>
+    <a href="/login">Kund</a>
   </div>
   <div class="service">
     <img src="/assets/Städare.png" alt="Städare portal" />
@@ -17,3 +17,7 @@
     <a href="/admin/register">Admin</a>
   </div>
 </div>
+
+{{#if loggedIn}}
+  <p>LOGGED IN AS {{firstName}}</p>
+{{/if}}
