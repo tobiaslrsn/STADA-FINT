@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 
 // ROUTES
 const adminRoute = require("./routes/admin-route.js");
+const accountRoutes = require("./routes/accounts");
 const customerRoutes = require("./routes/customer");
 const cleanerRoutes = require("./routes/cleaner");
 
@@ -35,7 +36,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/* app.use(async (req, res, next) => {
+app.use(async (req, res, next) => {
   const { token } = req.cookies;
 
   if (token && jwt.verify(token, process.env.JWTSECRET)) {
@@ -47,14 +48,15 @@ app.use(cookieParser());
   }
   next();
 });
- */
+
 app.get("/", async (req, res) => {
   res.render("home");
 });
 
 app.use("/admin", adminRoute);
+app.use(accountRoutes);
 app.use(customerRoutes);
-app.use(cleanerRoutes);
+// app.use(cleanerRoutes);
 
 app.listen(8000, () => {
   console.log("/// RUNNING ON: http://localhost:8000");
