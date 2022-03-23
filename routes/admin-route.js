@@ -29,7 +29,11 @@ router.post("/register", async (req, res) => {
     if (admin) {
       res.send("TAKEN");
     } else if (adminUsername.length < 6) {
-      res.send("ADMIN USERNAME NEEDS TO BE MORE THAN 6");
+      // res.send("ADMIN USERNAME NEEDS TO BE MORE THAN 6");
+      res.render("accounts/admin", {
+        usernameLengthError:
+          "ADMIN USERNAME NEEDS TO BE MORE THAN 6 CHARACTERS",
+      });
     } else if (adminPassword !== adminPasswordConfirm) {
       res.send("NOT MATCHING PASSWORDS");
     } else if (adminPassword.length < 8) {

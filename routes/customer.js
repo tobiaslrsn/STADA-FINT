@@ -29,10 +29,12 @@ router.post("/registrera-kund", async (req, res) => {
       res.send("E-post upptagen");
     } else if (password !== confirmPassword) {
       res.send("Lösenordet matchar inte");
+    } else if (email !== " " && utils.validateEmailAddress(email) === -1) {
+      res.send("SLUTA");
     } else {
       const newCustomer = new CustomersModel({
         email,
-        password: utils.getHashedPassword(password),
+        password: utils.hashedPassword(password),
         firstName,
         lastName,
         streetName,
