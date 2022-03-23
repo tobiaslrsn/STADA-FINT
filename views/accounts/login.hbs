@@ -1,0 +1,21 @@
+<h2>LOGIN INFORMATION</h2>
+{{#if customerLoggedIn}}
+  <p>LOGGED IN AS {{firstName}}</p>
+
+  <form action="/log-out" method="post">
+    <input type="submit" value="LOG OUT" />
+  </form>
+
+{{else}}
+  <p>NOT LOGGED IN</p>
+{{/if}}
+
+<h2>LOG IN</h2>
+{{error}}
+<form action="/login" method="post">
+  <input type="text" name="email" placeholder="email" />
+  <br />
+  <input type="password" name="password" placeholder="password" />
+  <br />
+  <input type="submit" value="LOGIN" />
+</form>

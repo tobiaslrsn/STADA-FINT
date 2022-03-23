@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 // ROUTES
 const adminRoute = require("./routes/admin-route.js");
 const accountRoutes = require("./routes/accounts");
+const loginRoutes = require("./routes/login-route");
 const customerRoutes = require("./routes/customer");
 const cleanerRoutes = require("./routes/cleaner");
 
@@ -16,7 +17,7 @@ const cleanerRoutes = require("./routes/cleaner");
 
 // MODELS
 const AdminModels = require("./models/AdminModels.js");
-const BookingModels = require("./models/BookingModels.js");
+const BookingModels = require("./models/BookingsModel.js");
 const CleanerModels = require("./models/CleanersModel.js");
 const CustomersModels = require("./models/CustomersModel.js");
 // !MODELS
@@ -55,6 +56,7 @@ app.get("/", async (req, res) => {
 
 app.use("/admin", adminRoute);
 app.use(accountRoutes);
+app.use(loginRoutes);
 app.use(customerRoutes);
 // app.use(cleanerRoutes);
 

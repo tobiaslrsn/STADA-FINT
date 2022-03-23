@@ -7,9 +7,13 @@ const router = express.Router();
 
 // REGISTRATION VIEW
 
+// CLEANER
+
 router.get("/registrera-stadare", (req, res) => {
   res.render("accounts/register");
 });
+
+// CUSTOMER
 
 router.get("/registrera-konto", (req, res) => {
   res.render("accounts/register", { customer: true });
