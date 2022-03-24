@@ -26,7 +26,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 5rem;
 
   @include for-phone-only {
     gap: 1rem;
@@ -43,6 +42,10 @@
   justify-content: space-evenly;
   gap: 5rem;
   flex-wrap: wrap;
+
+  @include for-phone-only {
+    gap: 2rem;
+  }
 }
 
 .reg-contact-container {
@@ -88,4 +91,10 @@
     border-radius: 10px;
     padding: 1rem;
   }
+}
+
+.registration-error {
+  color: gray;
+  font-size: 0.7rem;
+  z-index: 12000;
 }

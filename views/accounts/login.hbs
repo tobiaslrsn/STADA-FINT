@@ -18,11 +18,16 @@
   <div class="login-container">
     <h2>Logga in</h2>
     <form action="/login" method="post">
-      <input type="text" name="email" placeholder="📧 E-post" />
 
+      <input
+        type="text"
+        name="email"
+        placeholder="📧 E-post {{emailWrongFormat}}"
+      />
       <input type="password" name="password" placeholder="🔒 Lösenord " />
 
       <p class="error">{{loginError}}</p>
+
       <input type="submit" value="Logga in" class="submit-btn" />
     </form>
 

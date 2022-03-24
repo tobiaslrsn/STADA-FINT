@@ -4,6 +4,11 @@ const CustomersModel = require("../models/CustomersModel");
 
 const router = express.Router();
 
+router.get("/boka-stadning", async (req, res) => {
+  console.log(res.locals.customerId);
+
+  res.render("bookings/booking");
+});
 // REGISTRATION VIEW
 
 router.get("/registrera-konto", (req, res) => {
@@ -53,9 +58,11 @@ router.post("/registrera-kund", async (req, res) => {
       if (utils.validateRegistration(newCustomer)) {
         await newCustomer.save();
 
-        res.send("Konto registrerat");
+        res.redirect("/login");
       } else {
-        res.send("Something went wrong");
+        res.render("accounts/register", {
+          somethingWentWrong: "Ajdå, här blev något fel!",
+        });
       }
     }
   });

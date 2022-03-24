@@ -1,0 +1,56 @@
+<div class="booking-wrapper">
+
+  <div class="booking-container">
+
+    <div class="services">
+      TJÄNST 1
+      <br />
+      TJÄNST 2
+      <br />
+      TJÄNST 3
+    </div>
+
+    <div class="booking-form">
+      <form action="/boka-stadning" method="post">
+
+        <input type="text" name="firstName" placeholder="Förnamn" /><br />
+
+        <input type="text" name="lastName" placeholder="Efternamn" /><br />
+
+        <input type="text" name="streetName" placeholder="Gata" /><br />
+
+        <input type="text" name="postalCode" placeholder="Postnummer" /><br />
+
+        <input type="text" name="city" placeholder="Ort" /><br />
+
+        <input type="date" name="date" /><br />
+
+        <input type="submit" value="Boka" />
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+{{#if loggedIn}}
+
+  {{#if admin}}
+    SÅ SER ADMIN DET HÄR
+  {{/if}}
+
+  {{#if customer}}
+    SÅ SER KUNDEN DET HÄR
+  {{/if}}
+
+  {{#if staff}}
+    SÅ SER PERSONAL DET HÄR
+  {{/if}}
+
+{{else}}
+
+  DU ÄR UTLOGGAD
+
+{{/if}}

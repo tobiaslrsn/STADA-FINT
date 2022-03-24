@@ -5,9 +5,10 @@ const CustomersModel = require("../models/CustomersModel.js");
 const AdminModel = require("../models/AdminModels.js");
 const utils = require("../utils.js");
 const jwt = require("jsonwebtoken");
+const { redirect } = require("express/lib/response");
 
 router.get("/login", async (req, res) => {
-  await CustomersModel.findById(res.locals.userId).lean();
+  await CustomersModel.findById(res.locals.customerId).lean();
 
   res.render("accounts/login");
 });
@@ -17,7 +18,7 @@ router.post("/login", async (req, res) => {
 
   CustomersModel.findOne({ email }, (err, user) => {
     if (user && utils.comparePassword(password, user.password)) {
-      const userData = { userId: user._id, email };
+      const userData = { customerId: user._id, email };
 
       const accessToken = jwt.sign(userData, process.env.JWTSECRET);
 
@@ -33,6 +34,13 @@ router.post("/login", async (req, res) => {
       });
     }
   });
+  if (email !== " " && utils.validateEmailAddress(email) === -1) {
+    res.render("accounts/login", {
+      emailWrongFormat: "adressen har fel format.",
+    });
+  } else {
+    res.redirect("/");
+  }
 });
 
 router.post("/log-out", (req, res) => {
