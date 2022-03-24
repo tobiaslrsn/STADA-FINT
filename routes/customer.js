@@ -7,7 +7,11 @@ const router = express.Router();
 
 // BOOKING VIEW
 
-router.get("/boka-stadning", (req, res) => {
+router.get("/boka-stadning", async (req, res) => {
+  console.log(res.locals.customerId);
+  const customer = await CustomersModel.findById(res.locals.customerId);
+  console.log(customer);
+
   res.render("bookings/booking");
 });
 
@@ -16,6 +20,8 @@ router.get("/boka-stadning", (req, res) => {
 router.post("/boka-stadning", async (req, res) => {
   const { firstName, lastName, streetName, postalCode, city, date } = req.body;
 
+  const customer = await CustomersModel.findById(res.locals.customerId);
+
   const newBooking = new BookingsModel({
     firstName,
     lastName,
@@ -23,11 +29,15 @@ router.post("/boka-stadning", async (req, res) => {
     postalCode,
     city,
     date,
-    bookedBy: res.locals.customerId,
+    bookedBy: customer._id,
     assignedTo: null,
   });
 
   await newBooking.save();
+
+  customer.bookings.push(newBooking);
+  customer.save();
+
   res.redirect("/");
 });
 
