@@ -27,6 +27,14 @@ router.post("/registrera-kund", async (req, res) => {
   CustomersModel.findOne({ email }, async (err, customer) => {
     if (customer) {
       res.send("E-post upptagen");
+    } else if (firstName <= 1) {
+      res.render("accounts/register", {
+        usernameToShort: "Användarnamnet måste vara mer än 1 bokstav",
+      });
+    } else if (lastName <= 1 && lastName >= 4) {
+      res.render("accounts/register", {
+        lastnameError: "Efternamn måste vara mer än 1 bokstav",
+      });
     } else if (password !== confirmPassword) {
       res.send("Lösenordet matchar inte");
     } else if (email !== " " && utils.validateEmailAddress(email) === -1) {

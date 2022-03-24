@@ -21,6 +21,10 @@ router.get("/register", async (req, res) => {
   res.render("accounts/admin");
 });
 
+router.get("/admin-inlogg", async (req, res) => {
+  res.render("accounts/login-admin");
+});
+
 //REGISTRERA ADMIN
 router.post("/register", async (req, res) => {
   const { adminUsername, adminPassword, adminPasswordConfirm } = req.body;
@@ -28,11 +32,10 @@ router.post("/register", async (req, res) => {
   AdminModel.findOne({ adminUsername }, async (err, admin) => {
     if (admin) {
       res.send("TAKEN");
-    } else if (adminUsername.length < 6) {
+    } else if (adminUsername.length < 6 || adminUsername.length > 6) {
       // res.send("ADMIN USERNAME NEEDS TO BE MORE THAN 6");
       res.render("accounts/admin", {
-        usernameLengthError:
-          "ADMIN USERNAME NEEDS TO BE MORE THAN 6 CHARACTERS",
+        usernameLengthError: "Admin ID behöver vara 6 siffror långt",
       });
     } else if (adminPassword !== adminPasswordConfirm) {
       res.send("NOT MATCHING PASSWORDS");

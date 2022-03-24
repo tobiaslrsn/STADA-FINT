@@ -2,12 +2,16 @@ const { Schema, model } = require("mongoose");
 
 const adminSchema = new Schema({
   adminUsername: {
-    type: String,
+    type: Number,
     required: true,
   },
   adminPassword: {
     type: String,
     required: true,
+  },
+  adminPasswordConfirm: {
+    type: String,
+    // required: true,
   },
   ifAdmin: {
     type: Boolean,

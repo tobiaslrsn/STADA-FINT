@@ -1,0 +1,62 @@
+.reg-admin-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .reg-admin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    height: 50%;
+    width: 50vw;
+    text-align: center;
+    padding: 1rem;
+
+    @include for-phone-only {
+      width: 80vw;
+    }
+    h2 {
+      color: $primary-font-color;
+    }
+    p {
+      color: gray;
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      width: 70%;
+      padding-top: 2rem;
+      margin-bottom: 1rem;
+
+      input {
+        height: 2.7rem;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: #a7d0ab;
+        border-radius: 10px;
+        padding: 0.7rem;
+
+        @include for-phone-only {
+          width: 70vw;
+        }
+      }
+      .submit-btn {
+        cursor: pointer;
+        width: 40%;
+        background: $dark-green-color;
+        @include for-phone-only {
+          width: 45vw;
+        }
+      }
+    }
+  }
+}

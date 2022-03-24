@@ -1,0 +1,27 @@
+.booking-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .booking-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    gap: 1rem;
+
+    .services {
+      width: 20vw;
+      height: 20vh;
+      background: white;
+    }
+    .booking-form {
+      width: 20vw;
+      height: 20vh;
+      background: white;
+    }
+  }
+}

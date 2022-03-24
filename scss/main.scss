@@ -3,7 +3,9 @@
 @import "./elements/footer.scss";
 @import "./elements/homepage.scss";
 @import "./elements/register-page.scss";
-
+@import "./elements/login-page.scss";
+@import "./elements/booking.scss";
+@import "./elements/admin-registration.scss";
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,4 +16,15 @@
 
 body {
   background-color: $background-color;
+}
+
+::placeholder {
+  font-size: 1rem;
+}
+
+.error {
+  margin: 0;
+  font-size: 1rem;
+  word-break: keep-all;
+  width: 80vw;
 }
