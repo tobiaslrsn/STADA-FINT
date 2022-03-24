@@ -10,8 +10,7 @@ const cookieParser = require("cookie-parser");
 const adminRoute = require("./routes/admin-route.js");
 const accountRoutes = require("./routes/accounts");
 const loginRoutes = require("./routes/login-route");
-const customerRoutes = require("./routes/customer");
-const cleanerRoutes = require("./routes/cleaner");
+const bookingRoutes = require("./routes/bookings");
 
 // !ROUTES
 
@@ -57,8 +56,7 @@ app.get("/", async (req, res) => {
 app.use("/admin", adminRoute);
 app.use(accountRoutes);
 app.use(loginRoutes);
-app.use(customerRoutes);
-// app.use(cleanerRoutes);
+app.use(bookingRoutes);
 
 app.listen(8000, () => {
   console.log("/// RUNNING ON: http://localhost:8000");
