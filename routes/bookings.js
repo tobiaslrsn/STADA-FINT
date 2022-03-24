@@ -2,12 +2,13 @@ const express = require("express");
 const utils = require("../utils");
 const CustomersModel = require("../models/CustomersModel");
 const BookingsModel = require("../models/BookingsModel");
+const middlewares = require("../middlewares/auth");
 
 const router = express.Router();
 
 // BOOKING VIEW
 
-router.get("/boka-stadning", async (req, res) => {
+router.get("/boka-stadning", middlewares.forceAuthorize, (req, res) => {
   res.render("bookings/booking");
 });
 
