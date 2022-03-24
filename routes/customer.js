@@ -1,44 +1,40 @@
-const express = require("express");
-const utils = require("../utils");
-const CustomersModel = require("../models/CustomersModel");
-const BookingsModel = require("../models/BookingsModel");
+// const express = require("express");
+// const utils = require("../utils");
+// const CustomersModel = require("../models/CustomersModel");
+// const BookingsModel = require("../models/BookingsModel");
 
-const router = express.Router();
+// const router = express.Router();
 
-// BOOKING VIEW
+// // BOOKING VIEW
 
-router.get("/boka-stadning", async (req, res) => {
-  console.log(res.locals.customerId);
-  const customer = await CustomersModel.findById(res.locals.customerId);
-  console.log(customer);
+// router.get("/boka-stadning", async (req, res) => {
+//   res.render("bookings/booking");
+// });
 
-  res.render("bookings/booking");
-});
+// // BOOK CLEANING
 
-// BOOK CLEANING
+// router.post("/boka-stadning", async (req, res) => {
+//   const { firstName, lastName, streetName, postalCode, city, date } = req.body;
 
-router.post("/boka-stadning", async (req, res) => {
-  const { firstName, lastName, streetName, postalCode, city, date } = req.body;
+//   const customer = await CustomersModel.findById(res.locals.customerId);
 
-  const customer = await CustomersModel.findById(res.locals.customerId);
+//   const newBooking = new BookingsModel({
+//     firstName,
+//     lastName,
+//     streetName,
+//     postalCode,
+//     city,
+//     date,
+//     bookedBy: customer._id,
+//     assignedTo: null,
+//   });
 
-  const newBooking = new BookingsModel({
-    firstName,
-    lastName,
-    streetName,
-    postalCode,
-    city,
-    date,
-    bookedBy: customer._id,
-    assignedTo: null,
-  });
+//   await newBooking.save();
 
-  await newBooking.save();
+//   customer.bookings.push(newBooking);
+//   customer.save();
 
-  customer.bookings.push(newBooking);
-  customer.save();
+//   res.redirect("/");
+// });
 
-  res.redirect("/");
-});
-
-module.exports = router;
+// module.exports = router;
