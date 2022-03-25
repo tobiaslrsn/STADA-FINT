@@ -88,7 +88,7 @@ router.post("/registrera-stadare", async (req, res) => {
       if (utils.validateRegistration(newCleaner)) {
         await newCleaner.save();
 
-        res.send("Konto registrerat");
+        res.redirect("/");
       } else {
         res.send("Something went wrong");
       }
@@ -139,7 +139,7 @@ router.post("/registrera-kund", async (req, res) => {
       if (utils.validateRegistration(newCustomer)) {
         await newCustomer.save();
 
-        res.send("Konto registrerat"); // REDIRECT TILL STÄDARENS SIDA MED UPPDRAG
+        res.redirect("/"); // REDIRECT TILL STÄDARENS SIDA MED UPPDRAG
       } else {
         res.send("Something went wrong");
       }
