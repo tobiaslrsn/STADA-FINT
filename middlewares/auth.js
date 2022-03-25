@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 const forceAuthorize = (req, res, next) => {
-  const { token } = req.cookies;
+  const { customerToken } = req.cookies;
 
-  if (token && jwt.verify(token, process.env.JWTSECRET)) {
+  if (customerToken && jwt.verify(customerToken, process.env.JWT_CUSTOMER)) {
     next();
   } else {
     res.sendStatus(401); // Redirect till någon error.hbs
