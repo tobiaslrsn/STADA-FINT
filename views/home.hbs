@@ -18,6 +18,34 @@
   </div>
 </div>
 
-{{#if loggedIn}}
+{{!-- {{#if adminLoggedIn}}
+<div class="logo-container">
+  <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
+  <h2>StädaFint AB</h2>
+</div>
+
+<div class="services-container">
+  <div class="service">
+    <img src="/assets/Kund.png" alt="Kund portal" />
+    <a href="/login">Kund</a>
+  </div>
+  <div class="service">
+    <img src="/assets/Städare.png" alt="Städare portal" />
+    <a href="/registrera-stadare">Städare</a>
+  </div>
+  <div class="service">
+    <img src="/assets/Admin.png" alt="Admin portal" />
+    <a href="/admin/register">Admin</a>
+  </div>
+</div>
+{{/if}} --}}
+
+{{#if customerLoggedIn}}
   <p>LOGGED IN AS {{firstName}}</p>
+{{/if}}
+
+{{#if cleanerLoggedIn}}
+
+  <p>LOGGED IN AS {{firstName}}</p>
+
 {{/if}}

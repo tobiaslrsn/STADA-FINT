@@ -5,25 +5,68 @@ const CustomersModel = require("../models/CustomersModel.js");
 const AdminModel = require("../models/AdminModels.js");
 const utils = require("../utils.js");
 const jwt = require("jsonwebtoken");
+const CleanersModel = require("../models/CleanersModel.js");
 
-router.get("/login", async (req, res) => {
-  await CustomersModel.findById(res.locals.userId).lean();
+// CUSTOMER LOGIN VIEW
 
-  res.render("accounts/login");
+router.get("/logga-in", (req, res) => {
+  res.render("accounts/login", { customer: true });
 });
 
-router.post("/login", async (req, res) => {
+// CLEANER LOGIN VIEW
+
+router.get("/logga-in-stadare", (req, res) => {
+  res.render("accounts/login", { cleaner: true });
+});
+
+// CUSTOMER LOGIN
+
+router.post("/logga-in", async (req, res) => {
   const { email, password } = req.body;
 
   CustomersModel.findOne({ email }, async (err, customer) => {
     if (customer && utils.comparePassword(password, customer.password)) {
-      const userData = { customerId: customer._id, email };
+      const customerData = {
+        customerId: customer._id,
+        firstName: customer.firstName,
+        email,
+      };
 
-      const accessToken = jwt.sign(userData, process.env.JWTSECRET);
+      const accessToken = jwt.sign(customerData, process.env.JWT_CUSTOMER);
 
-      res.cookie("token", accessToken);
+      res.cookie("customerToken", accessToken);
 
       await customer.save();
+      res.redirect("/");
+    } else {
+      console.log(err);
+
+      res.render("accounts/login", {
+        loginError:
+          "Oj, antingen är du inte registrerad eller så skrev du fel.",
+      });
+    }
+  });
+});
+
+// CLEANER LOGIN
+
+router.post("/logga-in-stadare", async (req, res) => {
+  const { email, password } = req.body;
+
+  CleanersModel.findOne({ email }, async (err, cleaner) => {
+    if (cleaner && utils.comparePassword(password, cleaner.password)) {
+      const cleanerData = {
+        cleaner: cleaner._id,
+        firstName: cleaner.firstName,
+        email,
+      };
+
+      const accessToken = jwt.sign(cleanerData, process.env.JWT_CLEANER);
+
+      res.cookie("cleanerToken", accessToken);
+
+      await cleaner.save();
       res.redirect("/");
     } else {
       console.log(err);

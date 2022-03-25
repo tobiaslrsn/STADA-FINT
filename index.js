@@ -37,15 +37,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(async (req, res, next) => {
-  const { token } = req.cookies;
+  const { customerToken } = req.cookies;
 
-  if (token && jwt.verify(token, process.env.JWTSECRET)) {
-    const tokenData = jwt.decode(token, process.env.JWTSECRET);
-    res.locals.loggedIn = true;
-    res.locals.customerId = tokenData.customerId;
-    res.locals.firstName = tokenData.firstName;
+  if (customerToken && jwt.verify(customerToken, process.env.JWT_CUSTOMER)) {
+    const customerData = jwt.decode(customerToken, process.env.JWT_CUSTOMER);
+    res.locals.customerLoggedIn = true;
+    res.locals.customerId = customerData.customerId;
+    res.locals.firstName = customerData.firstName;
   } else {
-    res.locals.loggedIn = false;
+    res.locals.customerLoggedIn = false;
+  }
+  next();
+});
+
+app.use(async (req, res, next) => {
+  const { cleanerToken } = req.cookies;
+
+  if (cleanerToken && jwt.verify(cleanerToken, process.env.JWT_CLEANER)) {
+    const cleanerData = jwt.decode(cleanerToken, process.env.JWT_CLEANER);
+    res.locals.cleanerLoggedIn = true;
+    res.locals.cleanerId = cleanerData.cleanerId;
+    res.locals.firstName = cleanerData.firstName;
+  } else {
+    res.locals.cleanerLoggedIn = false;
   }
   next();
 });
