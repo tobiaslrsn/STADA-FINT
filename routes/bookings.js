@@ -15,7 +15,16 @@ router.get("/boka-stadning", middlewares.forceAuthorize, (req, res) => {
 // BOOK CLEANING
 
 router.post("/boka-stadning", async (req, res) => {
-  const { firstName, lastName, streetName, postalCode, city, date } = req.body;
+  const {
+    firstName,
+    lastName,
+    streetName,
+    postalCode,
+    city,
+    date,
+    cleaningOption,
+    message,
+  } = req.body;
 
   const customer = await CustomersModel.findById(res.locals.customerId);
 
@@ -26,8 +35,9 @@ router.post("/boka-stadning", async (req, res) => {
     postalCode,
     city,
     date,
+    cleaningOption,
+    message,
     bookedBy: customer._id,
-    assignedTo: null,
   });
 
   await newBooking.save();

@@ -1,16 +1,15 @@
-{{!-- {{#if loggedIn}} --}}
 <div class="booking-wrapper">
-
   <div class="booking-container">
-
     <div class="services">
       <div class="img-container">
         <img src="/assets/Admin.png" alt="" />
-        <p>DIAMANTSTÄD</p>
+        <p>Diamant städning</p>
         <img src="/assets/Admin.png" alt="" />
-        <p>SILVERSTÄD</p>
+        <p>Topp städning</p>
         <img src="/assets/Admin.png" alt="" />
-        <p>FÖNSTERPUTS</p>
+        <p>Basic städning</p>
+        <img src="/assets/Admin.png" alt="" />
+        <p>Fönstertvätt</p>
       </div>
     </div>
 
@@ -18,32 +17,28 @@
       <form action="/boka-stadning" method="post">
         <div class="customer-information">
           <input type="text" name="firstName" placeholder="Förnamn" /><br />
-
           <input type="text" name="lastName" placeholder="Efternamn" /><br />
-
           <input type="text" name="streetName" placeholder="Gata" /><br />
-
           <input type="text" name="postalCode" placeholder="Postnummer" /><br />
-
           <input type="text" name="city" placeholder="Ort" /><br />
-
         </div>
         <div class="submit-booking">
           <input type="date" name="date" /><br />
-
-          <select name="sfasfa" id="asfas">
-            <option value="diamant">diamant städ</option>
-            <option value="silver">silverstäd</option>
+          <select name="cleaningOption" id="asfas">
+            <option value="Basic städning">Basic städning</option>
+            <option value="Topp städning">Topp städning</option>
+            <option value="Diamant städning">Diamant städning</option>
+            <option value="Fönstertvätt">Fönstertvätt</option>
           </select>
+          <textarea
+            name="message"
+            cols="35"
+            rows="10"
+            placeholder="Skriv ditt meddelande här"
+          ></textarea>
           <input type="submit" value="Boka" class="submit-btn" />
-
         </div>
-
       </form>
-
     </div>
-
   </div>
-
 </div>
-{{!-- {{/if}} --}}
