@@ -87,7 +87,7 @@ router.post("/logga-in-stadare", async (req, res) => {
 });
 
 router.post("/log-out", (req, res) => {
-  res.cookie("token", "", { maxAge: 0 });
+  res.cookie("customerToken", "", { maxAge: 0 });
   res.redirect("/");
 });
 
