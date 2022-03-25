@@ -1,9 +1,49 @@
-<form action="/boka-stadning" method="post">
-  <input type="text" name="firstName" placeholder="Förnamn" /><br />
-  <input type="text" name="lastName" placeholder="Efternamn" /><br />
-  <input type="text" name="streetName" placeholder="Gata" /><br />
-  <input type="text" name="postalCode" placeholder="Postnummer" /><br />
-  <input type="text" name="city" placeholder="Ort" /><br />
-  <input type="date" name="date" /><br />
-  <input type="submit" value="Boka" />
-</form>
+{{!-- {{#if loggedIn}} --}}
+<div class="booking-wrapper">
+
+  <div class="booking-container">
+
+    <div class="services">
+      <div class="img-container">
+        <img src="/assets/Admin.png" alt="" />
+        <p>DIAMANTSTÄD</p>
+        <img src="/assets/Admin.png" alt="" />
+        <p>SILVERSTÄD</p>
+        <img src="/assets/Admin.png" alt="" />
+        <p>FÖNSTERPUTS</p>
+      </div>
+    </div>
+
+    <div class="booking-form">
+      <form action="/boka-stadning" method="post">
+        <div class="customer-information">
+          <input type="text" name="firstName" placeholder="Förnamn" /><br />
+
+          <input type="text" name="lastName" placeholder="Efternamn" /><br />
+
+          <input type="text" name="streetName" placeholder="Gata" /><br />
+
+          <input type="text" name="postalCode" placeholder="Postnummer" /><br />
+
+          <input type="text" name="city" placeholder="Ort" /><br />
+
+        </div>
+        <div class="submit-booking">
+          <input type="date" name="date" /><br />
+
+          <select name="sfasfa" id="asfas">
+            <option value="diamant">diamant städ</option>
+            <option value="silver">silverstäd</option>
+          </select>
+          <input type="submit" value="Boka" class="submit-btn" />
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+{{!-- {{/if}} --}}

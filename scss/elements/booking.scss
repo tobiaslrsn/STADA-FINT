@@ -3,25 +3,123 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 100vw;
 
   .booking-container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     height: 50%;
+    width: 80vw;
     gap: 1rem;
 
     .services {
-      width: 20vw;
-      height: 20vh;
-      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      width: 40%;
+
+      padding: 2rem;
+      background-color: white;
+
+      .img-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        z-index: 1251251;
+
+        img {
+          width: 60%;
+        }
+      }
+      @include for-phone-only {
+        display: none;
+      }
     }
     .booking-form {
-      width: 20vw;
-      height: 20vh;
+      width: 40vw;
+      padding: 2rem;
       background: white;
+
+      form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .customer-information {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        input {
+          height: 2.7rem;
+          max-width: 25rem;
+          min-width: 20rem;
+          border: none;
+          outline: none;
+          background: #a7d0ab;
+          border-radius: 10px;
+          padding: 1rem;
+
+          @include for-phone-only {
+            align-items: center;
+          }
+        }
+      }
+
+      .submit-booking {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        input {
+          height: 2.7rem;
+          max-width: 25rem;
+          min-width: 20rem;
+          border: none;
+          outline: none;
+          background: #a7d0ab;
+          border-radius: 10px;
+          padding: 1rem;
+        }
+        select {
+          height: 2.7rem;
+          max-width: 25rem;
+          min-width: 20rem;
+          border: none;
+          outline: none;
+          background: #a7d0ab;
+          border-radius: 10px;
+          padding-left: 1rem;
+          margin-bottom: 1rem;
+        }
+        .submit-btn {
+          cursor: pointer;
+          width: 40%;
+          height: 5rem;
+          background: $dark-green-color;
+          color: white;
+          font-size: 2rem;
+          @include for-phone-only {
+            width: 45vw;
+          }
+        }
+      }
     }
   }
 }

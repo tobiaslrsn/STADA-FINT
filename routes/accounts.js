@@ -42,6 +42,14 @@ router.post("/registrera-stadare", async (req, res) => {
       res.render("accounts/register", {
         passDontMatch: "Lösenorden matchar inte!",
       });
+    } else if (password < 1) {
+      res.render("accounts/register", {
+        passwordEmpty: "Du måste fylla i ett lösenord.",
+      });
+    } else if (password < 5) {
+      res.render("accounts/register", {
+        passwordToShort: "Lösenordet behöver vara minst 5 tecken.",
+      });
     } else if (email !== " " && utils.validateEmailAddress(email) === -1) {
       res.render("accounts/register", {
         emailValid: "Skriv in din mail i rätt format",

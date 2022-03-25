@@ -77,6 +77,13 @@ router.post("/logga-in-stadare", async (req, res) => {
       });
     }
   });
+  if (email !== " " && utils.validateEmailAddress(email) === -1) {
+    res.render("accounts/login", {
+      emailWrongFormat: "adressen har fel format.",
+    });
+  } else {
+    res.redirect("/");
+  }
 });
 
 router.post("/log-out", (req, res) => {

@@ -17,35 +17,37 @@
 
 <div class="reg-contact-container">
   <input type="text" name="firstName" placeholder=" 👋  Förnamn" />
-        {{firstNameEmpty}}
+  <p class="registration-error">{{firstNameEmpty}}</p>
 
   <input type="text" name="lastName" placeholder="👊  Efternamn" />
-        {{lastNameEpty}}
+  <p class="registration-error">{{lastNameEpty}}</p>
 
   <input type="text" name="email" placeholder="📧  E-post" />
-         {{emailTaken}} {{emailValid}}
+  <p class="registration-error">{{emailTaken}}{{emailValid}}</p>
 
   <input type="text" name="streetName" placeholder="📫  Gata" />
-        {{adressEmpty}}
+  <p class="registration-error">{{adressEmpty}}</p>
 
   <input type="text" name="postalCode" placeholder="🔢  Postnummer" />
-        {{postalCodeEmpty}}
+  <p class="registration-error">{{postalCodeEmpty}}</p>
 
   <input type="text" name="city" placeholder="🌍  Ort" />
-       {{enterCity}}
-
+  <p class="registration-error">{{enterCity}}</p>
 </div>
 
    
 <div class="reg-password-container">
+  <p class="registration-error">{{somethingWentWrong}}</p>
    
    <input type="password" name="password" placeholder="🔒  Lösenord" />
+   
   <input
     type="password"
     name="confirmPassword"
     placeholder="🔓  Bekräfta lösenordet"
   />
-  {{passDontMatch}}
+  <p class="registration-error">{{passwordToShort}}{{passwordEmpty}}{{passDontMatch}}</p>
+  
   <input type="submit" value="Registrera konto ✌" class="register-btn" />
   </div>
   

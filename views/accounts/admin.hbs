@@ -18,30 +18,27 @@
       <a href="/admin/register">Admin</a>
     </div>
   </div>
-
-{{else}}
-
-  <div class="logo-container">
-    <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
-    {{! <h2>StädaFint AB</h2> }}
-  </div>
-
-  <div class="reg-admin-wrapper">
-    <div class="reg-admin-container">
-      <h2>Ny admin</h2>
-      <form action="/admin/register" method="post">
-        <input type="number" name="adminUsername" placeholder="Admin ID" /><br
-        />
-        <p class="error"> {{usernameLengthError}} </p>
-        <input type="password" name="adminPassword" placeholder="Lösenord" /><br
-        />
-        <input
-          type="password"
-          name="adminPasswordConfirm"
-          placeholder="Bekräfta lösenord"
-        /><br />
-        <input type="submit" value="Registrera konto" />
-      </form>
-    </div>
-  </div>
 {{/if}}
+
+<div class="logo-container">
+  <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
+  {{! <h2>StädaFint AB</h2> }}
+</div>
+
+<div class="reg-admin-wrapper">
+  <div class="reg-admin-container">
+    <h2>Ny admin</h2>
+    <form action="/admin/register" method="post">
+      <input type="number" name="adminUsername" placeholder="Admin ID" /><br />
+      <p class="error"> {{usernameLengthError}} </p>
+      <input type="password" name="adminPassword" placeholder="Lösenord" /><br
+      />
+      <input
+        type="password"
+        name="adminPasswordConfirm"
+        placeholder="Bekräfta lösenord"
+      /><br />
+      <input type="submit" value="Registrera konto" />
+    </form>
+  </div>
+</div>
