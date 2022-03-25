@@ -1,5 +1,6 @@
-{{#if loggedIn}}
-  <p>LOGGED IN AS {{email}}</p>
+<h2>LOGIN INFORMATION</h2>
+{{#if customerLoggedIn}}
+  <p>LOGGED IN AS {{firstName}}</p>
 
   <form action="/log-out" method="post">
     <input type="submit" value="LOG OUT" />

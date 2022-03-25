@@ -8,7 +8,7 @@ const customerSchema = new mongoose.Schema({
   streetName: { type: String, required: true },
   postalCode: { type: String, required: true },
   city: { type: String, required: true },
-  bookings: Array,
+  bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Bookings" }],
 });
 
 const CustomersModel = mongoose.model("Customers", customerSchema);

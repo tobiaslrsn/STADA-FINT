@@ -1,18 +1,22 @@
 const express = require("express");
 const utils = require("../utils");
 const CleanersModel = require("../models/CleanersModel");
-const { append } = require("express/lib/response");
+const CustomersModel = require("../models/CustomersModel");
 
 const router = express.Router();
 
-router.get("/bokning", (req, res) => {
-  res.render("accounts/booking");
-});
-
 // REGISTRATION VIEW
+
+// CLEANER
 
 router.get("/registrera-stadare", (req, res) => {
   res.render("accounts/register");
+});
+
+// CUSTOMER
+
+router.get("/registrera-konto", (req, res) => {
+  res.render("accounts/register", { customer: true });
 });
 
 // REGISTER CLEANER
@@ -75,6 +79,57 @@ router.post("/registrera-stadare", async (req, res) => {
 
       if (utils.validateRegistration(newCleaner)) {
         await newCleaner.save();
+
+        res.send("Konto registrerat");
+      } else {
+        res.send("Something went wrong");
+      }
+    }
+  });
+});
+
+// REGISTER CUSTOMER
+
+router.post("/registrera-kund", async (req, res) => {
+  const {
+    email,
+    password,
+    confirmPassword,
+    firstName,
+    lastName,
+    streetName,
+    postalCode,
+    city,
+  } = req.body;
+
+  CustomersModel.findOne({ email }, async (err, customer) => {
+    if (customer) {
+      res.send("E-post upptagen");
+    } else if (firstName <= 1) {
+      res.render("accounts/register", {
+        usernameToShort: "Användarnamnet måste vara mer än 1 bokstav",
+      });
+    } else if (lastName <= 1 && lastName >= 4) {
+      res.render("accounts/register", {
+        lastnameError: "Efternamn måste vara mer än 1 bokstav",
+      });
+    } else if (password !== confirmPassword) {
+      res.send("Lösenordet matchar inte");
+    } else if (email !== " " && utils.validateEmailAddress(email) === -1) {
+      res.send("SLUTA");
+    } else {
+      const newCustomer = new CustomersModel({
+        email,
+        password: utils.hashedPassword(password),
+        firstName,
+        lastName,
+        streetName,
+        postalCode,
+        city,
+      });
+
+      if (utils.validateRegistration(newCustomer)) {
+        await newCustomer.save();
 
         res.send("Konto registrerat"); // REDIRECT TILL STÄDARENS SIDA MED UPPDRAG
       } else {

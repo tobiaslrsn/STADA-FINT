@@ -15,14 +15,15 @@ router.get("/login", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  CustomersModel.findOne({ email }, (err, user) => {
-    if (user && utils.comparePassword(password, user.password)) {
-      const userData = { userId: user._id, email };
+  CustomersModel.findOne({ email }, async (err, customer) => {
+    if (customer && utils.comparePassword(password, customer.password)) {
+      const userData = { customerId: customer._id, email };
 
       const accessToken = jwt.sign(userData, process.env.JWTSECRET);
 
       res.cookie("token", accessToken);
 
+      await customer.save();
       res.redirect("/");
     } else {
       console.log(err);

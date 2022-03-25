@@ -8,15 +8,15 @@ const cookieParser = require("cookie-parser");
 
 // ROUTES
 const adminRoute = require("./routes/admin-route.js");
-const customerRoutes = require("./routes/customer");
-const cleanerRoutes = require("./routes/cleaner");
 const loginRoutes = require("./routes/login-route.js");
+const accountRoutes = require("./routes/accounts");
+const bookingRoutes = require("./routes/bookings");
 
 // !ROUTES
 
 // MODELS
 const AdminModels = require("./models/AdminModels.js");
-const BookingModels = require("./models/BookingModels.js");
+const BookingModels = require("./models/BookingsModel.js");
 const CleanerModels = require("./models/CleanersModel.js");
 const CustomersModels = require("./models/CustomersModel.js");
 // !MODELS
@@ -42,7 +42,7 @@ app.use(async (req, res, next) => {
   if (token && jwt.verify(token, process.env.JWTSECRET)) {
     const tokenData = jwt.decode(token, process.env.JWTSECRET);
     res.locals.loggedIn = true;
-    res.locals.userId = tokenData.userId;
+    res.locals.customerId = tokenData.customerId;
     res.locals.firstName = tokenData.firstName;
   } else {
     res.locals.loggedIn = false;
@@ -55,9 +55,9 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/admin", adminRoute);
-app.use(customerRoutes);
-app.use(cleanerRoutes);
 app.use(loginRoutes);
+app.use(accountRoutes);
+app.use(bookingRoutes);
 
 app.listen(8000, () => {
   console.log("/// RUNNING ON: http://localhost:8000");
