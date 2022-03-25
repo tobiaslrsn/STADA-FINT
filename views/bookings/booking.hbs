@@ -1,31 +1,43 @@
+{{!-- {{#if loggedIn}} --}}
 <div class="booking-wrapper">
 
   <div class="booking-container">
 
     <div class="services">
-      TJÄNST 1
-      <br />
-      TJÄNST 2
-      <br />
-      TJÄNST 3
+      <div class="img-container">
+        <img src="/assets/Admin.png" alt="" />
+        <p>DIAMANTSTÄD</p>
+        <img src="/assets/Admin.png" alt="" />
+        <p>SILVERSTÄD</p>
+        <img src="/assets/Admin.png" alt="" />
+        <p>FÖNSTERPUTS</p>
+      </div>
     </div>
 
     <div class="booking-form">
       <form action="/boka-stadning" method="post">
+        <div class="customer-information">
+          <input type="text" name="firstName" placeholder="Förnamn" /><br />
 
-        <input type="text" name="firstName" placeholder="Förnamn" /><br />
+          <input type="text" name="lastName" placeholder="Efternamn" /><br />
 
-        <input type="text" name="lastName" placeholder="Efternamn" /><br />
+          <input type="text" name="streetName" placeholder="Gata" /><br />
 
-        <input type="text" name="streetName" placeholder="Gata" /><br />
+          <input type="text" name="postalCode" placeholder="Postnummer" /><br />
 
-        <input type="text" name="postalCode" placeholder="Postnummer" /><br />
+          <input type="text" name="city" placeholder="Ort" /><br />
 
-        <input type="text" name="city" placeholder="Ort" /><br />
+        </div>
+        <div class="submit-booking">
+          <input type="date" name="date" /><br />
 
-        <input type="date" name="date" /><br />
+          <select name="sfasfa" id="asfas">
+            <option value="diamant">diamant städ</option>
+            <option value="silver">silverstäd</option>
+          </select>
+          <input type="submit" value="Boka" class="submit-btn" />
 
-        <input type="submit" value="Boka" />
+        </div>
 
       </form>
 
@@ -34,23 +46,4 @@
   </div>
 
 </div>
-
-{{#if loggedIn}}
-
-  {{#if admin}}
-    SÅ SER ADMIN DET HÄR
-  {{/if}}
-
-  {{#if customer}}
-    SÅ SER KUNDEN DET HÄR
-  {{/if}}
-
-  {{#if staff}}
-    SÅ SER PERSONAL DET HÄR
-  {{/if}}
-
-{{else}}
-
-  DU ÄR UTLOGGAD
-
-{{/if}}
+{{!-- {{/if}} --}}
