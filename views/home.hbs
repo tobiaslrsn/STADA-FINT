@@ -1,9 +1,18 @@
 <h2>/// HOME</h2>
+{{!-- simon la till här --}}
 {{#if customerLoggedIn}}
 
-<p>Hello</p>
+<p>Hello customer</p>
 
 {{/if}}
+{{#if adminLoggedIn}}
+
+<p>Hello admin</p>
+
+<p>{{adminUsername}}</p>
+
+{{/if}}
+{{!-- till hit --}}
 
 <div class="bubble-container">
 

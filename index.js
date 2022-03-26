@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 const adminRoute = require("./routes/admin-route.js");
 const customerRoutes = require("./routes/customer");
 const cleanerRoutes = require("./routes/cleaner");
-const loginRoutes = require("./routes/login-route.js")
+const loginRoutes = require("./routes/login-route.js");
 
 // !ROUTES
 
@@ -36,7 +36,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
   const { token } = req.cookies;
 
   if (token && jwt.verify(token, process.env.JWTSECRET)) {

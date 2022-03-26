@@ -1,21 +1,39 @@
 <h2>LOGIN INFORMATION</h2>
-{{#if loggedIn}}
-<p>LOGGED IN AS {{firstName}}</p>
-
-<form action="/login/log-out" method="post">
-    <input type="submit" value="LOG OUT" />
-</form>
-
-{{else}}
-<p>NOT LOGGED IN</p>
-{{/if}}
 
 <h2>LOG IN</h2>
 {{error}}
-<form action="/login" method="post">
+{{!-- <form action="/login" method="post">
     <input type="text" name="email" placeholder="email" />
     <br />
     <input type="password" name="password" placeholder="password" />
     <br />
     <input type="submit" value="LOGIN" />
+</form> --}}
+<form {{#if cleaners}} action="/login-cleaners" 
+
+{{else}} action="/login"
+{{!-- {{#if kund}}
+ action="/login"
+{{/if}} --}}
+{{/if}} method="post">
+    <input type="email" name="email" placeholder="E-post" /><br />
+    <input type="password" name="password" placeholder="Lösenord" /><br />
+   
+    <input type="text" name="firstName" placeholder="Förnamn" /><br />
+    <input type="text" name="lastName" placeholder="Efternamn" /><br />
+   
+    <input type="submit" value="login" />
 </form>
+
+
+
+
+
+
+
+{{#if loggedIn}}
+{{#if admin}}SÅ SER ADMIN DET HÄR{{/if}}
+{{#if customer}}SÅ SER KUNDEN DET HÄR{{/if}}
+{{#if staff}}SÅ SER PERSONAL DET HÄR{{/if}}
+{{else}}DU ÄR UTLOGGAD{{/if}}
+
