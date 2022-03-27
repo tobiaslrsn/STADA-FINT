@@ -19,6 +19,12 @@ router.get("/logga-in-stadare", (req, res) => {
   res.render("accounts/login", { cleaner: true });
 });
 
+// ADMIN LOGIN VIEW
+
+router.get("/logga-in-admin", (req, res) => {
+  res.render("accounts/login", { admin: true });
+});
+
 // CUSTOMER LOGIN
 
 router.post("/logga-in", async (req, res) => {
@@ -73,6 +79,35 @@ router.post("/logga-in-stadare", async (req, res) => {
       res.render("accounts/login", {
         emailWrongFormat: "adressen har fel format.",
       });
+    } else {
+      console.log(err);
+
+      res.render("accounts/login", {
+        loginError:
+          "Oj, antingen är du inte registrerad eller så skrev du fel.",
+      });
+    }
+  });
+});
+
+// ADMIN LOGIN
+
+router.post("/logga-in-admin", async (req, res) => {
+  const { adminUsername, password } = req.body;
+
+  AdminModel.findOne({ adminUsername }, async (err, admin) => {
+    if (admin && utils.comparePassword(password, admin.adminPassword)) {
+      const adminData = {
+        adminId: admin._id,
+        adminUsername: admin.adminUsername,
+      };
+
+      const accessToken = jwt.sign(adminData, process.env.JWT_ADMIN);
+
+      res.cookie("adminToken", accessToken);
+
+      await admin.save();
+      res.redirect("/logga-in-admin");
     } else {
       console.log(err);
 

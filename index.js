@@ -64,6 +64,21 @@ app.use(async (req, res, next) => {
   next();
 });
 
+//admin jwt token
+app.use(async (req, res, next) => {
+  const { adminToken } = req.cookies;
+
+  if (adminToken && jwt.verify(adminToken, process.env.JWT_ADMIN)) {
+    const adminData = jwt.decode(adminToken, process.env.JWT_ADMIN);
+    res.locals.adminLoggedIn = true;
+    res.locals.adminId = adminData.adminId;
+    res.locals.adminUsername = adminData.adminUsername;
+  } else {
+    res.locals.adminLoggedIn = false;
+  }
+  next();
+});
+
 app.get("/", async (req, res) => {
   res.render("home");
 });

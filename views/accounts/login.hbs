@@ -15,6 +15,17 @@
 STÄDARE
 {{/if}}
 
+{{#if adminLoggedIn}}
+    <p>LOGGED IN AS {{adminUsername}}</p>
+
+    <form action="/log-out" method="post">
+      <input type="submit" value="LOG OUT" />
+    </form>
+
+  {{else}}
+    <p>NOT LOGGED IN</p>
+  {{/if}}
+
 <div class="logo-container">
   <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
   {{! <h2>StädaFint AB</h2> }}
@@ -30,14 +41,23 @@ STÄDARE
     {{#if cleaner}}
       action="/logga-in-stadare"
     {{/if}}
-    method="post">
-      
+    {{#if admin}}
+      action="/logga-in-admin"
+    {{/if}}
 
+    method="post">
+      {{#if admin}}
+      <input type="number" name="adminUsername" placeholder="😎 Admin ID" />
+
+      {{else}}
       <input
         type="text"
         name="email"
         placeholder="📧 E-post {{emailWrongFormat}}"
       />
+      {{/if}}
+
+
       <input type="password" name="password" placeholder="🔒 Lösenord " />
 
       <p class="error">{{loginError}}</p>
