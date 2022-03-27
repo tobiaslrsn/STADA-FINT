@@ -50,6 +50,7 @@ router.post("/logga-in", async (req, res) => {
       res.render("accounts/login", {
         loginError:
           "Oj, antingen är du inte registrerad eller så skrev du fel.",
+        customer: true,
       });
     }
   });
@@ -78,6 +79,7 @@ router.post("/logga-in-stadare", async (req, res) => {
     if (email !== " " && utils.validateEmailAddress(email) === -1) {
       res.render("accounts/login", {
         emailWrongFormat: "adressen har fel format.",
+        cleaner: true,
       });
     } else {
       console.log(err);
@@ -85,6 +87,7 @@ router.post("/logga-in-stadare", async (req, res) => {
       res.render("accounts/login", {
         loginError:
           "Oj, antingen är du inte registrerad eller så skrev du fel.",
+        cleaner: true,
       });
     }
   });
@@ -114,6 +117,7 @@ router.post("/logga-in-admin", async (req, res) => {
       res.render("accounts/login", {
         loginError:
           "Oj, antingen är du inte registrerad eller så skrev du fel.",
+        admin: true,
       });
     }
   });

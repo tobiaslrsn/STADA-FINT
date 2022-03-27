@@ -44,7 +44,7 @@ router.post("/register", async (req, res) => {
     } else {
       const newAdmin = new AdminModel({
         adminUsername,
-        adminPassword: utils.getHashedPassword(adminPassword),
+        adminPassword: utils.hashedPassword(adminPassword),
       });
 
       await newAdmin.save();
