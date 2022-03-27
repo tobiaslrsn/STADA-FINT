@@ -50,16 +50,6 @@ router.post("/boka-stadning", async (req, res) => {
     res.render("bookings/booking", {
       chooseDate: "Du måste välja ett datum!",
     });
-    // } else if (
-    //   cleaningOption !=
-    //   ("Basic städning" ||
-    //     "Topp städning" ||
-    //     "Diamant städning" ||
-    //     "Fönstertvätt")
-    // ) {
-    //   res.render("bookings/booking", {
-    //     chooseCleaning: "Du måste välja vilken städning du vill ha!",
-    //   });
   } else if (
     cleaningOption != "Basic städning" &&
     cleaningOption != "Topp städning" &&
