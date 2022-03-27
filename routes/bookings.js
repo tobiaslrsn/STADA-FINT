@@ -83,4 +83,24 @@ router.post("/boka-stadning", async (req, res) => {
   }
 });
 
+// VIEW BOOKINGS
+
+router.get("/dina-bokningar", async (req, res) => {
+  const customer = await CustomersModel.findById(res.locals.customerId)
+    .populate("bookings")
+    .lean();
+
+  const bookings = customer.bookings;
+
+  res.render("bookings/all-bookings", { bookings });
+});
+
+// VIEW SINGLE BOOKING
+
+router.get("/din-bokning/:id", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id);
+
+  res.render("bookings/single-booking", booking);
+});
+
 module.exports = router;
