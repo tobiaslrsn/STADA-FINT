@@ -9,6 +9,7 @@ const bookingSchema = mongoose.Schema({
   date: { type: Date, required: true },
   cleaningOption: {
     type: String,
+    required: true,
     enum: [
       "Basic städning",
       "Topp städning",

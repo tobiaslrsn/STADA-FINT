@@ -17,19 +17,48 @@
       <form action="/boka-stadning" method="post">
         <div class="customer-information">
           <input type="text" name="firstName" placeholder="Förnamn" /><br />
+          <p class="registration-error">{{firstNameEmpty}}</p>
           <input type="text" name="lastName" placeholder="Efternamn" /><br />
+          <p class="registration-error">{{lastNameEpty}}</p>
           <input type="text" name="streetName" placeholder="Gata" /><br />
+          <p class="registration-error">{{adressEmpty}}</p>
           <input type="text" name="postalCode" placeholder="Postnummer" /><br />
+          <p class="registration-error">{{postalCodeEmpty}}</p>
           <input type="text" name="city" placeholder="Ort" /><br />
+          <p class="registration-error">{{enterCity}}</p>
         </div>
         <div class="submit-booking">
-          <input type="date" name="date" /><br />
-          <select name="cleaningOption" id="asfas">
-            <option value="Basic städning">Basic städning</option>
-            <option value="Topp städning">Topp städning</option>
-            <option value="Diamant städning">Diamant städning</option>
-            <option value="Fönstertvätt">Fönstertvätt</option>
-          </select>
+          <input type="datetime-local" name="date" /><br />
+          <p class="registration-error">{{chooseDate}}</p>
+          <input
+            type="radio"
+            name="cleaningOption"
+            id="basic"
+            value="Basic städning"
+          />
+          <label for="basic">Basic städning</label>
+          <input
+            type="radio"
+            name="cleaningOption"
+            id="top"
+            value="Topp städning"
+          />
+          <label for="top">Topp städning</label>
+          <input
+            type="radio"
+            name="cleaningOption"
+            id="diamond"
+            value="Diamant städning"
+          />
+          <label for="diamond">Diamant städning</label>
+          <input
+            type="radio"
+            name="cleaningOption"
+            id="windows"
+            value="Fönstertvätt"
+          />
+          <label for="windows">Fönstertvätt</label>
+          <p class="registration-error">{{chooseCleaning}}</p>
           <textarea
             name="message"
             cols="35"

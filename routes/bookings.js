@@ -26,26 +26,71 @@ router.post("/boka-stadning", async (req, res) => {
     message,
   } = req.body;
 
-  const customer = await CustomersModel.findById(res.locals.customerId);
+  if (firstName < 1) {
+    res.render("bookings/booking", {
+      firstNameEmpty: "Du kan inte lämna fältet tomt!",
+    });
+  } else if (lastName < 1) {
+    res.render("bookings/booking", {
+      lastNameEpty: "Du kan inte lämna fältet tomt!",
+    });
+  } else if (streetName < 1) {
+    res.render("bookings/booking", {
+      adressEmpty: "Vi behöver din adress för att städa!",
+    });
+  } else if (postalCode < 1) {
+    res.render("bookings/booking", {
+      postalCodeEmpty: "Fyll i ditt postnummer",
+    });
+  } else if (city < 1) {
+    res.render("bookings/booking", {
+      enterCity: "Välj din stad!",
+    });
+  } else if (date < 1) {
+    res.render("bookings/booking", {
+      chooseDate: "Du måste välja ett datum!",
+    });
+    // } else if (
+    //   cleaningOption !=
+    //   ("Basic städning" ||
+    //     "Topp städning" ||
+    //     "Diamant städning" ||
+    //     "Fönstertvätt")
+    // ) {
+    //   res.render("bookings/booking", {
+    //     chooseCleaning: "Du måste välja vilken städning du vill ha!",
+    //   });
+  } else if (
+    cleaningOption != "Basic städning" &&
+    cleaningOption != "Topp städning" &&
+    cleaningOption != "Diamant städning" &&
+    cleaningOption != "Fönstertvätt"
+  ) {
+    res.render("bookings/booking", {
+      chooseCleaning: "Du måste välja vilken städning du vill ha!",
+    });
+  } else {
+    const customer = await CustomersModel.findById(res.locals.customerId);
 
-  const newBooking = new BookingsModel({
-    firstName,
-    lastName,
-    streetName,
-    postalCode,
-    city,
-    date,
-    cleaningOption,
-    message,
-    bookedBy: customer._id,
-  });
+    const newBooking = new BookingsModel({
+      firstName,
+      lastName,
+      streetName,
+      postalCode,
+      city,
+      date,
+      cleaningOption,
+      message,
+      bookedBy: customer._id,
+    });
 
-  await newBooking.save();
+    await newBooking.save();
 
-  customer.bookings.push(newBooking);
-  customer.save();
+    customer.bookings.push(newBooking);
+    customer.save();
 
-  res.redirect("/");
+    res.redirect("/");
+  }
 });
 
 module.exports = router;
