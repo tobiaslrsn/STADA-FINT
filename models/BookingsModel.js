@@ -7,6 +7,17 @@ const bookingSchema = mongoose.Schema({
   postalCode: { type: String, required: true },
   city: { type: String, required: true },
   date: { type: Date, required: true },
+  cleaningOption: {
+    type: String,
+    required: true,
+    enum: [
+      "Basic städning",
+      "Topp städning",
+      "Diamant städning",
+      "Fönstertvätt",
+    ],
+  },
+  message: String,
   bookedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Customers",

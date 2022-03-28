@@ -15,27 +15,72 @@ router.get("/boka-stadning", middlewares.forceAuthorize, (req, res) => {
 // BOOK CLEANING
 
 router.post("/boka-stadning", async (req, res) => {
-  const { firstName, lastName, streetName, postalCode, city, date } = req.body;
-
-  const customer = await CustomersModel.findById(res.locals.customerId);
-
-  const newBooking = new BookingsModel({
+  const {
     firstName,
     lastName,
     streetName,
     postalCode,
     city,
     date,
-    bookedBy: customer._id,
-    assignedTo: null,
-  });
+    cleaningOption,
+    message,
+  } = req.body;
 
-  await newBooking.save();
+  if (firstName < 1) {
+    res.render("bookings/booking", {
+      firstNameEmpty: "Du kan inte lämna fältet tomt!",
+    });
+  } else if (lastName < 1) {
+    res.render("bookings/booking", {
+      lastNameEpty: "Du kan inte lämna fältet tomt!",
+    });
+  } else if (streetName < 1) {
+    res.render("bookings/booking", {
+      adressEmpty: "Vi behöver din adress för att städa!",
+    });
+  } else if (postalCode < 1) {
+    res.render("bookings/booking", {
+      postalCodeEmpty: "Fyll i ditt postnummer",
+    });
+  } else if (city < 1) {
+    res.render("bookings/booking", {
+      enterCity: "Välj din stad!",
+    });
+  } else if (date < 1) {
+    res.render("bookings/booking", {
+      chooseDate: "Du måste välja ett datum!",
+    });
+  } else if (
+    cleaningOption != "Basic städning" &&
+    cleaningOption != "Topp städning" &&
+    cleaningOption != "Diamant städning" &&
+    cleaningOption != "Fönstertvätt"
+  ) {
+    res.render("bookings/booking", {
+      chooseCleaning: "Du måste välja vilken städning du vill ha!",
+    });
+  } else {
+    const customer = await CustomersModel.findById(res.locals.customerId);
 
-  customer.bookings.push(newBooking);
-  customer.save();
+    const newBooking = new BookingsModel({
+      firstName,
+      lastName,
+      streetName,
+      postalCode,
+      city,
+      date,
+      cleaningOption,
+      message,
+      bookedBy: customer._id,
+    });
 
-  res.redirect("/");
+    await newBooking.save();
+
+    customer.bookings.push(newBooking);
+    customer.save();
+
+    res.redirect("/");
+  }
 });
 
 module.exports = router;
