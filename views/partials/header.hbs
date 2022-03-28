@@ -1,11 +1,36 @@
 <div class="header-container">
-  <a href="/boka-stadning">Boka städning</a>
-  <a href="/">Hem</a>
-  <a href="/registrera-konto">Registrera kundkonto</a>
-  <a href="/logga-in">Logga in</a>
-  <a href="/logga-in-stadare">Logga in städare</a>
-  <a href="/registrera-stadare">Registrera städare</a>
+  {{#if cleanerLoggedIn}}
+    <a href="/boka-stadning">Boka städning</a>
+    <a href="/">Hem</a>
+    <a href="/registrera-konto">Registrera kundkonto</a>
+    <a href="/logga-in">Logga in</a>
+    <a href="/logga-in-stadare">Logga in städare</a>
+    <a href="/registrera-stadare">Registrera städare</a>
+    <a href="#contact">Kontakt</a>
+  {{else}}
+    {{#if customerLoggedIn}}
+      <a href="/boka-stadning">Boka städning</a>
+    {{else}}
+      {{#if adminLoggedIn}}
+        <h2>ADMIN</h2>
+      {{else}}
+        <a href="/logga-in">Logga in</a>
+        <a href="/registrera-konto">Registrera kundkonto</a>
+      {{/if}}
+    {{/if}}
+  {{/if}}
   <a href="#contact">Kontakt</a>
+</div>
+
+<div class="header-container">
+
+  {{#if cleanerLoggedIn}}{{/if}}
+
+  {{#if customerLoggedIn}}
+    <a href="/boka-stadning">Boka städning</a>
+  {{/if}}
+
+  {{#if adminLoggedIn}}{{/if}}
 </div>
 
 <div id="menu">

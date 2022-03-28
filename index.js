@@ -11,6 +11,7 @@ const adminRoute = require("./routes/admin-route.js");
 const loginRoutes = require("./routes/login-route.js");
 const accountRoutes = require("./routes/accounts");
 const bookingRoutes = require("./routes/bookings");
+const cleanerSchedule = require("./routes/cleaner-schedule");
 
 // !ROUTES
 
@@ -87,6 +88,7 @@ app.use("/admin", adminRoute);
 app.use(loginRoutes);
 app.use(accountRoutes);
 app.use(bookingRoutes);
+app.use(cleanerSchedule);
 
 app.listen(8080, () => {
   console.log("/// RUNNING ON: http://localhost:8080");

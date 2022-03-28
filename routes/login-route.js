@@ -129,6 +129,8 @@ router.post("/logga-in-admin", async (req, res) => {
 
 router.post("/log-out", (req, res) => {
   res.cookie("customerToken", "", { maxAge: 0 });
+  res.cookie("cleanerToken", "", { maxAge: 0 });
+  res.cookie("adminToken", "", { maxAge: 0 });
   res.redirect("/");
 });
 
