@@ -100,8 +100,6 @@ router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
 router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
   const booking = await BookingsModel.findById(req.params.id);
 
-  console.log(booking.status);
-
   res.render("bookings/single-booking", booking);
 });
 
