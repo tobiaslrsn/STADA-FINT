@@ -31,13 +31,17 @@ router.post("/logga-in", async (req, res) => {
         firstName: customer.firstName,
         email,
       };
-
       const accessToken = jwt.sign(customerData, process.env.JWT_CUSTOMER);
 
       res.cookie("customerToken", accessToken);
 
       await customer.save();
       res.redirect("/");
+    }
+    if (email !== " " && utils.validateEmailAddress(email) === -1) {
+      res.render("accounts/login", {
+        emailWrongFormat: "adressen har fel format.",
+      });
     } else {
       console.log(err);
 

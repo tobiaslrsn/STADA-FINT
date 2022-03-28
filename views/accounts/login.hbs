@@ -5,6 +5,7 @@
   <form action="/log-out" method="post">
     <input type="submit" value="LOG OUT" />
   </form>
+  
 
 {{else}}
 
@@ -14,6 +15,7 @@
 {{#if cleanerLoggedIn}}
 STÄDARE
 {{/if}}
+
 
 <div class="logo-container">
   <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
@@ -43,6 +45,7 @@ STÄDARE
       <p class="error">{{loginError}}</p>
 
       <input type="submit" value="Logga in" class="submit-btn" />
+
     </form>
 
     <p>Inte registrerad ännu? 😫
