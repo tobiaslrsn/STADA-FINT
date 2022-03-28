@@ -1,4 +1,5 @@
 <h2>LOGIN INFORMATION</h2>
+
 {{#if customerLoggedIn}}
   <p>Inloggad som kund: {{firstName}}</p>
 
@@ -11,7 +12,6 @@
 
   <p>KUND INTE INLOGGAD</p>
 {{/if}}
-
 {{#if cleanerLoggedIn}}
 <p>STÄDARE INLOGGAD</p>
     <form action="/log-out" method="post">
@@ -27,46 +27,38 @@
   {{/if}}
 
 <div class="logo-container">
-  {{! <h2>StädaFint AB</h2> }}
+  <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
 </div>
 
 <div class="login-wrapper">
   <div class="login-container">
     <h2>Logga in</h2>
     <form
-    {{#if customer}}
-      action="/logga-in"
-    {{/if}}
-    {{#if cleaner}}
-      action="/logga-in-stadare"
-    {{/if}}
-    {{#if admin}}
-      action="/logga-in-admin"
-    {{/if}}
-
-    method="post">
-      {{#if admin}}
-      <input type="number" name="adminUsername" placeholder="😎 Admin ID" />
-
-      {{else}}
-      <input
-        type="text"
-        name="email"
-        placeholder="📧 E-post {{emailWrongFormat}}"
-      />
+      {{#if customer}}
+        action="/logga-in"
       {{/if}}
-
-
+      {{#if cleaner}}
+        action="/logga-in-stadare"
+      {{/if}}
+      {{#if admin}}
+        action="/logga-in-admin"
+      {{/if}}
+      method="post"
+    >
+      {{#if admin}}
+        <input type="number" name="adminUsername" placeholder="😎 Admin ID" />
+      {{else}}
+        <input
+          type="text"
+          name="email"
+          placeholder="📧 E-post {{emailWrongFormat}}"
+        />
+      {{/if}}
       <input type="password" name="password" placeholder="🔒 Lösenord " />
-
       <p class="error">{{loginError}}</p>
-
       <input type="submit" value="Logga in" class="submit-btn" />
-
     </form>
-
     <p>Inte registrerad ännu? 😫
-      <br />
       <a href="/registrera-konto">Klicka här för att bli ny kund! 😍
       </a>
     </p>
