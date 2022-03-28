@@ -1,4 +1,6 @@
 <div class="bookings">
+  <p>Här kan du se detaljerna kring din bokning. Om det är något som inte
+    stämmer så kan du avboka och boka på nytt.</p>
   <p>Datum för städning: {{date}}</p>
   <p>Bokad av: {{firstName}} {{lastName}}</p>
   <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
@@ -6,6 +8,10 @@
   <p>Ditt meddelande: {{message}}</p>
   <p>Status: {{status}}</p>
 </div>
+
+<form action="/avboka">
+  <input type="submit" value="Avboka" />
+</form>
 
 <style>
   .bookings { margin-top: 100px; }
