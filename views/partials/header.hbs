@@ -1,4 +1,6 @@
 <div class="header-container">
+
+  {{! INLOGGAD SOM STÄDARE }}
   {{#if cleanerLoggedIn}}
     <a href="/boka-stadning">Boka städning</a>
     <a href="/">Hem</a>
@@ -8,20 +10,39 @@
     <a href="/registrera-stadare">Registrera städare</a>
     <a href="#contact">Kontakt</a>
   {{else}}
+
+    {{! INLOGGAD SOM KUND }}
     {{#if customerLoggedIn}}
       <a href="/boka-stadning">Boka städning</a>
+      <form action="/log-out" method="post">
+        <input type="submit" value="LOG OUT" />
+      </form>
+
     {{else}}
+
+      {{! INLOGGAD SOM ADMIN }}
       {{#if adminLoggedIn}}
         <h2>ADMIN</h2>
+        <a href="/boka-stadning">Boka städning</a>
+        <a href="/registrera-konto">Registrera kundkonto</a>
+        <a href="/registrera-stadare">Registrera städare</a>
+        <form action="/log-out" method="post">
+          <input type="submit" value="LOG OUT" />
+        </form>
+
       {{else}}
+
+        {{! UTLOGGAD }}
         <a href="/logga-in">Logga in</a>
         <a href="/registrera-konto">Registrera kundkonto</a>
+        <a href="#contact">Kontakt</a>
+
       {{/if}}
     {{/if}}
   {{/if}}
-  <a href="#contact">Kontakt</a>
-</div>
 
+</div>
+{{!-- 
 <div class="header-container">
 
   {{#if cleanerLoggedIn}}{{/if}}
@@ -31,7 +52,7 @@
   {{/if}}
 
   {{#if adminLoggedIn}}{{/if}}
-</div>
+</div> --}}
 
 <div id="menu">
   <div id="menu-bar" onclick="menuOnClick()">

@@ -21,10 +21,6 @@ router.get("/register", async (req, res) => {
   res.render("accounts/admin");
 });
 
-router.get("/admin-inlogg", async (req, res) => {
-  res.render("accounts/login-admin");
-});
-
 //REGISTRERA ADMIN
 router.post("/register", async (req, res) => {
   const { adminUsername, adminPassword, adminPasswordConfirm } = req.body;
@@ -48,7 +44,7 @@ router.post("/register", async (req, res) => {
       });
 
       await newAdmin.save();
-      res.sendStatus(200);
+      res.redirect("/");
     }
   });
 });
