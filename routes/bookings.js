@@ -100,9 +100,18 @@ router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
 router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
   const booking = await BookingsModel.findById(req.params.id);
 
+  console.log(booking.status);
+
   res.render("bookings/single-booking", booking);
 });
 
-router.post("/avboka", async (req, res) => {});
+router.post("/din-bokning/:id/avboka", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id);
+
+  booking.status = "Avbokad";
+  await booking.save();
+
+  res.redirect("/din-bokning/" + req.params.id);
+});
 
 module.exports = router;

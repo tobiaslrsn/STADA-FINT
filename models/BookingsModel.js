@@ -29,8 +29,8 @@ const bookingSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Bokad", "Bekräftad", "Genomförd"],
-    default: "Booked",
+    enum: ["Bokad", "Avbokad", "Bekräftad", "Genomförd"],
+    default: "Bokad",
   },
 });
 
