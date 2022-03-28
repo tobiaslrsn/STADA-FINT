@@ -85,7 +85,7 @@ router.post("/boka-stadning", async (req, res) => {
 
 // VIEW BOOKINGS
 
-router.get("/dina-bokningar", async (req, res) => {
+router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
   const customer = await CustomersModel.findById(res.locals.customerId)
     .populate("bookings")
     .lean();
@@ -97,10 +97,12 @@ router.get("/dina-bokningar", async (req, res) => {
 
 // VIEW SINGLE BOOKING
 
-router.get("/din-bokning/:id", async (req, res) => {
+router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
   const booking = await BookingsModel.findById(req.params.id);
 
   res.render("bookings/single-booking", booking);
 });
+
+router.post("/avboka", async (req, res) => {});
 
 module.exports = router;
