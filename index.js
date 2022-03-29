@@ -11,6 +11,7 @@ const adminRoute = require("./routes/admin-route.js");
 const loginRoutes = require("./routes/login-route.js");
 const accountRoutes = require("./routes/accounts");
 const bookingRoutes = require("./routes/bookings");
+const cleanerSchedule = require("./routes/cleaner-schedule");
 
 // !ROUTES
 
@@ -64,6 +65,21 @@ app.use(async (req, res, next) => {
   next();
 });
 
+//admin jwt token
+app.use(async (req, res, next) => {
+  const { adminToken } = req.cookies;
+
+  if (adminToken && jwt.verify(adminToken, process.env.JWT_ADMIN)) {
+    const adminData = jwt.decode(adminToken, process.env.JWT_ADMIN);
+    res.locals.adminLoggedIn = true;
+    res.locals.adminId = adminData.adminId;
+    res.locals.adminUsername = adminData.adminUsername;
+  } else {
+    res.locals.adminLoggedIn = false;
+  }
+  next();
+});
+
 app.get("/", async (req, res) => {
   res.render("home");
 });
@@ -72,6 +88,7 @@ app.use("/admin", adminRoute);
 app.use(loginRoutes);
 app.use(accountRoutes);
 app.use(bookingRoutes);
+app.use(cleanerSchedule);
 
 app.listen(8080, () => {
   console.log("/// RUNNING ON: http://localhost:8080");

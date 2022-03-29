@@ -8,7 +8,7 @@ const router = express.Router();
 
 // BOOKING VIEW
 
-router.get("/boka-stadning", middlewares.forceAuthorize, (req, res) => {
+router.get("/boka-stadning", (req, res) => {
   res.render("bookings/booking");
 });
 

@@ -1,14 +1,61 @@
 <div class="header-container">
-  <a href="/boka-stadning">Boka städning</a>
-  <a href="/dina-bokningar">Dina bokningar</a>
-  <a href="/">Hem</a>
-  <a href="/registrera-konto">Registrera kundkonto</a>
-  <a href="/logga-in">Logga in</a>
-  <a href="/logga-in-stadare">Logga in städare</a>
-  <a href="/registrera-stadare">Registrera städare</a>
-  <a href="#contact">Kontakt</a>
+
+  {{! INLOGGAD SOM STÄDARE }}
+  {{#if cleanerLoggedIn}}
+    <a href="/">Hem</a>
+    <a href="/boka-stadning">Boka städning</a>
+    <a href="/registrera-konto">Registrera kundkonto</a>
+    <a href="/logga-in">Logga in</a>
+    <a href="/logga-in-stadare">Logga in städare</a>
+    <a href="/registrera-stadare">Registrera städare</a>
+    <form action="/log-out" method="post">
+      <input type="submit" value="Logga ut" class="logout-btn" />
+    </form>
+  {{else}}
+
+    {{! INLOGGAD SOM KUND }}
+    {{#if customerLoggedIn}}
+      <a href="/">Hem</a>
+      <a href="/boka-stadning">Boka städning</a>
+      <a href="/dina-bokningar">Dina bokningar</a>
+      <a href="#footer">Kontakt</a>
+
+      <form action="/log-out" method="post">
+        <input type="submit" value="Logga ut" class="logout-btn" />
+      </form>
+
+    {{else}}
+
+      {{! INLOGGAD SOM ADMIN }}
+      {{#if adminLoggedIn}}
+
+        <div class="dropdown">
+          <button class="dropbtn">Dropdown</button>
+          <div class="dropdown-content">
+            <a href="/">Hem</a>
+            <a href="/boka-stadning">Boka städning</a>
+            <a href="/registrera-konto">Registrera kundkonto</a>
+            <a href="/registrera-stadare">Registrera städare</a>
+
+            <form action="/log-out" method="post">
+              <input type="submit" value="Logga ut" class="logout-btn" />
+            </form>
+          </div>
+        </div>
+      {{else}}
+
+        {{! UTLOGGAD }}
+        <a href="/logga-in">Logga in</a>
+        <a href="/registrera-konto">Registrera kundkonto</a>
+        <a href="#footer">Kontakt</a>
+
+      {{/if}}
+    {{/if}}
+  {{/if}}
+
 </div>
 
+{{! HAMBURGER MENU }}
 <div id="menu">
   <div id="menu-bar" onclick="menuOnClick()">
     <div id="bar1" class="bar"></div>
@@ -17,10 +64,46 @@
   </div>
   <nav class="nav" id="nav">
     <ul>
-      <li><a href="/">Hem</a></li>
-      <li><a href="/registrera-konto">Registrera kundkonto</a></li>
-      <li><a href="/registrera-stadare">Registrera städare</a></li>
-      <li><a href="#contact">Kontakt</a></li>
+
+      {{#if cleanerLoggedIn}}
+        <li><a href="#SCHEMA"></a></li>
+
+        <form action="/log-out" method="post">
+          <input type="submit" value="Logga ut" class="logout-btn" />
+        </form>
+      {{else}}
+        {{#if customerLoggedIn}}
+          <li><a href="/">Hem</a></li>
+          <li><a href="/boka-stadning">Boka städning</a></li>
+          <li><a href="/dina-bokningar">Dina bokningar</a></li>
+          <form action="/log-out" method="post">
+            <input type="submit" value="Logga ut" class="logout-btn" />
+          </form>
+        {{else}}
+
+          {{#if adminLoggedIn}}
+
+            <li> <a href="/">Hem</a></li>
+            <li><a href="/boka-stadning">Boka städning</a></li>
+            <li><a href="/registrera-konto">Registrera kundkonto</a></li>
+            <li><a href="/registrera-stadare">Registrera städare</a></li>
+            <form action="/log-out" method="post">
+              <input type="submit" value="Logga ut" class="logout-btn" />
+            </form>
+
+          {{else}}
+
+            {{! UTLOGGAD }}
+            <li><a href="/logga-in">Logga in</a></li>
+            <li><a href="/registrera-konto">Registrera kundkonto</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+            <form action="/log-out" method="post">
+              <input type="submit" value="Logga ut" class="logout-btn" />
+            </form>
+          {{/if}}
+        {{/if}}
+      {{/if}}
+
     </ul>
   </nav>
 </div>

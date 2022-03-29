@@ -6,16 +6,19 @@
 @import "./elements/login-page.scss";
 @import "./elements/booking.scss";
 @import "./elements/admin-registration.scss";
+@import "./elements/customer-bookings.scss";
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: $background-color;
+  // background-color: $background-color;
+  background-image: linear-gradient(to top, #adc8aa 10%, #e2ffd5 100%);
 }
 
 ::placeholder {
@@ -27,4 +30,11 @@ body {
   font-size: 1rem;
   word-break: keep-all;
   width: 80vw;
+}
+
+//Ta bort pilar vid input type="number"
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

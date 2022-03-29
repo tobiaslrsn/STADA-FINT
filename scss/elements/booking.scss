@@ -4,29 +4,25 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 100vh;
-  width: 100vw;
+  /* height: 100vh; */
+  /* width: 100%; */
+  margin-bottom: 5rem;
 
   .booking-container {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 50%;
-    width: 80vw;
-    gap: 1rem;
+    /* flex-wrap: wrap; */
+    /* height: 100vh; */
+    margin-top: 5rem;
+    width: 90vw;
 
     .services {
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      width: 40%;
-
-      padding: 2rem;
-      background-color: white;
+      height: 100vh;
 
       .img-container {
         display: flex;
@@ -42,21 +38,32 @@
           width: 60%;
         }
       }
+
       @include for-phone-only {
         display: none;
       }
     }
+
     .booking-form {
-      width: 40vw;
-      padding: 2rem;
+      width: 90vw;
+      height: 100%;
+      padding-top: 2rem;
       background: white;
+      margin-bottom: 2rem;
+      @include for-phone-only {
+        padding-top: 4rem;
+        margin-bottom: 10rem;
+      }
 
       form {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
         justify-content: center;
         gap: 3rem;
-        flex-wrap: wrap;
+        // margin-bottom: 4rem;
       }
 
       .customer-information {
@@ -81,12 +88,53 @@
         }
       }
 
-      .submit-booking {
+      .service-information {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        width: 40vw;
+        @include for-phone-only {
+          width: 90vw;
+        }
+        .submit-btn {
+          cursor: pointer;
+          width: 40%;
+          height: 2rem;
+          background: $dark-green-color;
+          color: white;
+          font-size: 1rem;
+          margin-top: 1rem;
+          @include for-phone-only {
+            width: 45vw;
+          }
+        }
+
+        .radio-btns-one,
+        .radio-btns-two {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          flex-direction: row;
+          width: 100%;
+          gap: 10px;
+        }
+
+        textarea {
+          resize: none;
+          width: 100%;
+          margin-top: 0.6rem;
+          height: 60%;
+        }
+      }
+
+      .submit-booking {
+        display: flex;
+        flex-direction: row;
         width: 50%;
         justify-content: center;
         align-items: center;
+
         input {
           height: 2.7rem;
           max-width: 25rem;
@@ -97,29 +145,23 @@
           border-radius: 10px;
           padding: 1rem;
         }
-        select {
-          height: 2.7rem;
-          max-width: 25rem;
-          min-width: 20rem;
-          border: none;
-          outline: none;
-          background: #a7d0ab;
-          border-radius: 10px;
-          padding-left: 1rem;
-          margin-bottom: 1rem;
-        }
-        .submit-btn {
-          cursor: pointer;
-          width: 40%;
-          height: 5rem;
-          background: $dark-green-color;
-          color: white;
-          font-size: 2rem;
-          @include for-phone-only {
-            width: 45vw;
-          }
-        }
       }
     }
   }
+}
+.book-btn {
+  outline: none;
+  border: none;
+  background-color: $dark-green-color;
+  padding: 1rem;
+  width: 10rem;
+  margin-top: 1.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.book-btn:hover {
+  background-color: $lighter-green-color;
+}
+.bookings {
+  margin-top: 6rem;
 }
