@@ -85,6 +85,8 @@ router.post("/boka-stadning", async (req, res) => {
 
 // VIEW BOOKINGS
 
+// CUSTOMER
+
 router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
   const customer = await CustomersModel.findById(res.locals.customerId)
     .populate("bookings")
@@ -93,6 +95,16 @@ router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
   const bookings = customer.bookings;
 
   res.render("bookings/all-bookings", { bookings });
+});
+
+// ADMIN
+
+router.get("/kundbokningar", async (req, res) => {
+  const customers = await CustomersModel.find().populate("bookings").lean();
+
+  const bookings = customers.bookings;
+
+  res.render("bookings/all-bookings", { customers });
 });
 
 // VIEW SINGLE BOOKING
