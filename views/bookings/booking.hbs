@@ -1,19 +1,10 @@
+<div class="logo-container-corner">
+  <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
+  <h2>StädaFint AB</h2>
+</div>
 {{#if customerLoggedIn}}
   <div class="booking-wrapper">
     <div class="booking-container">
-      <div class="services">
-        <div class="img-container">
-          <img src="/assets/Admin.png" alt="" />
-          <p>Diamant städning</p>
-          <img src="/assets/Admin.png" alt="" />
-          <p>Topp städning</p>
-          <img src="/assets/Admin.png" alt="" />
-          <p>Basic städning</p>
-          <img src="/assets/Admin.png" alt="" />
-          <p>Fönstertvätt</p>
-        </div>
-      </div>
-
       <div class="booking-form">
         <form action="/boka-stadning" method="post">
           <div class="customer-information">
@@ -28,53 +19,143 @@
             <p class="registration-error">{{postalCodeEmpty}}</p>
             <input type="text" name="city" placeholder="Ort" /><br />
             <p class="registration-error">{{enterCity}}</p>
-          </div>
-          <div class="submit-booking">
             <input type="datetime-local" name="date" /><br />
             <p class="registration-error">{{chooseDate}}</p>
-            <input
-              type="radio"
-              name="cleaningOption"
-              id="basic"
-              value="Basic städning"
-            />
-            <label for="basic">Basic städning</label>
-            <input
-              type="radio"
-              name="cleaningOption"
-              id="top"
-              value="Topp städning"
-            />
-            <label for="top">Topp städning</label>
-            <input
-              type="radio"
-              name="cleaningOption"
-              id="diamond"
-              value="Diamant städning"
-            />
-            <label for="diamond">Diamant städning</label>
-            <input
-              type="radio"
-              name="cleaningOption"
-              id="windows"
-              value="Fönstertvätt"
-            />
-            <label for="windows">Fönstertvätt</label>
-            <p class="registration-error">{{chooseCleaning}}</p>
+          </div>
+          {{! <div class="submit-booking"> }}
+
+          {{! DELA UPP FORMULÄRET HÄR ( TVÅ BOXAR) }}
+          <div class="service-information">
+            <div class="radio-btns-one">
+              <input
+                type="radio"
+                name="cleaningOption"
+                id="basic"
+                value="Basic städning"
+              />
+              <label for="basic">Basic städning</label>
+              <input
+                type="radio"
+                name="cleaningOption"
+                id="top"
+                value="Topp städning"
+              />
+              <label for="top">Topp städning</label>
+            </div>
+            <div class="radio-btns-two">
+
+              <input
+                type="radio"
+                name="cleaningOption"
+                id="diamond"
+                value="Diamant städning"
+              />
+              <label for="diamond">Diamant städning</label>
+              <input
+                type="radio"
+                name="cleaningOption"
+                id="windows"
+                value="Fönstertvätt"
+              />
+              <label for="windows">Fönstertvätt</label>
+              <p class="registration-error">{{chooseCleaning}}</p>
+            </div>
+
             <textarea
               name="message"
               cols="35"
               rows="10"
               placeholder="Skriv ditt meddelande här"
             ></textarea>
-            <input type="submit" value="Boka" class="submit-btn" />
+            <input type="submit" value="Boka" class="book-btn" />
           </div>
+          {{! </div> }}
         </form>
       </div>
     </div>
   </div>
 
 {{else}}
-  BLI NY KUND FÖR ATT BOKA
 
+  {{#if adminLoggedIn}}
+    BOKA ÅT KUND SOM ADMIN
+
+    <div class="booking-wrapper">
+      <div class="booking-container">
+        <div class="booking-form">
+          <form action="/boka-stadning" method="post">
+            <div class="customer-information">
+              <input type="text" name="firstName" placeholder="Förnamn" /><br />
+              <p class="registration-error">{{firstNameEmpty}}</p>
+              <input type="text" name="lastName" placeholder="Efternamn" /><br
+              />
+              <p class="registration-error">{{lastNameEpty}}</p>
+              <input type="text" name="streetName" placeholder="Gata" /><br />
+              <p class="registration-error">{{adressEmpty}}</p>
+              <input
+                type="text"
+                name="postalCode"
+                placeholder="Postnummer"
+              /><br />
+              <p class="registration-error">{{postalCodeEmpty}}</p>
+              <input type="text" name="city" placeholder="Ort" /><br />
+              <p class="registration-error">{{enterCity}}</p>
+              <input type="datetime-local" name="date" /><br />
+              <p class="registration-error">{{chooseDate}}</p>
+            </div>
+            {{! <div class="submit-booking"> }}
+
+            {{! DELA UPP FORMULÄRET HÄR ( TVÅ BOXAR) }}
+            <div class="service-information">
+              <div class="radio-btns-one">
+                <input
+                  type="radio"
+                  name="cleaningOption"
+                  id="basic"
+                  value="Basic städning"
+                />
+                <label for="basic">Basic städning</label>
+                <input
+                  type="radio"
+                  name="cleaningOption"
+                  id="top"
+                  value="Topp städning"
+                />
+                <label for="top">Topp städning</label>
+              </div>
+              <div class="radio-btns-two">
+
+                <input
+                  type="radio"
+                  name="cleaningOption"
+                  id="diamond"
+                  value="Diamant städning"
+                />
+                <label for="diamond">Diamant städning</label>
+                <input
+                  type="radio"
+                  name="cleaningOption"
+                  id="windows"
+                  value="Fönstertvätt"
+                />
+                <label for="windows">Fönstertvätt</label>
+                <p class="registration-error">{{chooseCleaning}}</p>
+              </div>
+
+              <textarea
+                name="message"
+                cols="35"
+                rows="10"
+                placeholder="Skriv ditt meddelande här"
+              ></textarea>
+              <input type="submit" value="Boka" class="book-btn" />
+            </div>
+            {{! </div> }}
+          </form>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    BLI NY KUND FÖR ATT BOKA
+  {{/if}}
 {{/if}}

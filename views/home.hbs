@@ -1,51 +1,44 @@
-<div class="logo-container">
-  <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
-  <h2>StädaFint AB</h2>
+<div class="wrapper">
+  <div class="logo-container">
+    <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
+    <h2>StädaFint AB</h2>
+  </div>
+
+  {{#if adminLoggedIn}}
+    <div class="admin-container">
+      <div class="admin-boxes">
+        <img src="/assets/Kund.png" alt="Kund portal" />
+        <a href="/registrera-konto">Kund</a>
+      </div>
+      <div class="admin-boxes">
+        <img src="/assets/Städare.png" alt="Städare portal" />
+        <a href="/registrera-stadare">Städare</a>
+      </div>
+      <div class="admin-boxes">
+        <img src="/assets/Admin.png" alt="Admin portal" />
+        <a href="/admin/register">Admin</a>
+      </div></div>
+  {{else}}
+    <div class="services-container">
+      <div class="service">
+        {{#if customerLoggedIn}}
+          <h2>Välkommen till Städa Fint</h2>
+          <p>Behöver du städhjälp? Boka här!</p>
+
+        {{else}}
+          {{#if cleanerLoggedIn}}
+            <h2 class="welcome-staff">Välkommen {{firstName}}!</h2>
+            <p>Kolla ditt schema här!</p>
+
+          {{else}}
+            <h2>Välkommen till Städa Fint!</h2>
+            <p>Klicka här för att bli ny kund och lägga bokning</p>
+
+          {{/if}}
+        {{/if}}
+
+      </div>
+    </div>
+  {{/if}}
+
 </div>
-
-<div class="services-container">
-  <div class="service">
-    <img src="/assets/Kund.png" alt="Kund portal" />
-    <a href="/login">Kund</a>
-  </div>
-  <div class="service">
-    <img src="/assets/Städare.png" alt="Städare portal" />
-    <a href="/registrera-stadare">Städare</a>
-  </div>
-  <div class="service">
-    <img src="/assets/Admin.png" alt="Admin portal" />
-    <a href="/admin/register">Admin</a>
-  </div>
-</div>
-
-{{!-- {{#if adminLoggedIn}}
-<div class="logo-container">
-  <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
-  <h2>StädaFint AB</h2>
-</div>
-
-<div class="services-container">
-  <div class="service">
-    <img src="/assets/Kund.png" alt="Kund portal" />
-    <a href="/login">Kund</a>
-  </div>
-  <div class="service">
-    <img src="/assets/Städare.png" alt="Städare portal" />
-    <a href="/registrera-stadare">Städare</a>
-  </div>
-  <div class="service">
-    <img src="/assets/Admin.png" alt="Admin portal" />
-    <a href="/admin/register">Admin</a>
-  </div>
-</div>
-{{/if}} --}}
-
-{{#if customerLoggedIn}}
-  <p>LOGGED IN AS {{firstName}}</p>
-{{/if}}
-
-{{#if cleanerLoggedIn}}
-
-  <p>LOGGED IN AS {{firstName}}</p>
-
-{{/if}}

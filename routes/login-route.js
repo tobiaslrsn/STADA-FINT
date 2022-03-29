@@ -114,7 +114,7 @@ router.post("/logga-in-admin", async (req, res) => {
       res.cookie("adminToken", accessToken);
 
       await admin.save();
-      res.redirect("/logga-in-admin");
+      res.redirect("/");
     } else {
       console.log(err);
 

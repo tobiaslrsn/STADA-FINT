@@ -1,39 +1,51 @@
-<h2>LOGIN INFORMATION</h2>
-
 {{#if customerLoggedIn}}
   <p>Inloggad som kund: {{firstName}}</p>
 
   <form action="/log-out" method="post">
     <input type="submit" value="LOG OUT" />
   </form>
+{{else}}
+  {{!-- <p>KUND INTE INLOGGAD</p> --}}
+{{/if}}
 
+{{#if cleanerLoggedIn}}
+  <p>STÄDARE INLOGGAD</p>
+  <form action="/log-out" method="post">
+    <input type="submit" value="LOG OUT" />
+  </form>
 
 {{else}}
-
-  <p>KUND INTE INLOGGAD</p>
+  {{!-- <p>STÄDARE INTE INLOGGAD</p> --}}
 {{/if}}
-{{#if cleanerLoggedIn}}
-<p>STÄDARE INLOGGAD</p>
-    <form action="/log-out" method="post">
-      <input type="submit" value="LOG OUT" />
-    </form>
 
-  {{else}}
-    <p>STÄDARE INTE INLOGGAD</p>
-  {{/if}}
-
-  {{#if adminLoggedIn}}
-
-  {{/if}}
+{{#if adminLoggedIn}}
+  inloggad som admin
+{{/if}}
 
 <div class="logo-container">
   <a href="/"><img src="/assets/Loga.png" alt="stada fint logo" /></a>
 </div>
 
-<div class="login-wrapper">
-  <div class="login-container">
-    <h2>Logga in</h2>
-    <form
+{{#if customerLoggedIn}}
+  REDAN INLOGGAD SOM KUND:
+  {{firstName}}
+{{else}}
+
+  {{#if cleanerLoggedIn}}
+    REDAN INLOGGAD SOM STÄDARE: 
+    {{firstName}}
+  {{else}}
+
+    {{#if adminLoggedIn}}
+      REDAN INLOGGAD SOM ADMIN:
+      {{adminUsername}}
+
+    {{else}}
+
+      <div class="login-wrapper">
+        <div class="login-container">
+          <h2>Logga in</h2>
+           <form
       {{#if customer}}
         action="/logga-in"
       {{/if}}
@@ -58,9 +70,16 @@
       <p class="error">{{loginError}}</p>
       <input type="submit" value="Logga in" class="submit-btn" />
     </form>
-    <p>Inte registrerad ännu? 😫
-      <a href="/registrera-konto">Klicka här för att bli ny kund! 😍
-      </a>
-    </p>
-  </div>
-</div>
+    {{#if customer}}
+          <p>Inte registrerad ännu? 😫
+            <a href="/registrera-konto">Klicka här för att bli ny kund! 😍
+            </a>
+          </p>
+    {{/if}}
+
+    
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+{{/if}}

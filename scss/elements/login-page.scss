@@ -12,9 +12,10 @@
     align-items: center;
     background: white;
     height: 50%;
-    width: 50vw;
+    width: 60vw;
     text-align: center;
     padding: 1rem;
+    margin-bottom: 7rem;
 
     @include for-phone-only {
       width: 80vw;
