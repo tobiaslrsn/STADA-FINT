@@ -18,6 +18,52 @@
     <p><span>Ditt meddelande:</span>
       {{#if message}} {{message}} {{else}} Inga önskemål {{/if}}</p>
     <p><span>Status: </span>{{status}}</p>
+    <div class="bookings">
+      {{#if customerLoggedIn}}
+        <p>Här kan du se detaljerna kring din bokning. Om det är något som inte
+          stämmer så kan du avboka och
+          <a href="/boka-stadning">boka på nytt.</a></p>
+        <br />
+      {{/if}}
+      {{#if adminLoggedIn}}
+        <p>Kundens bokningsdetaljer</p>
+      {{/if}}
+
+      <p>Datum för städning: {{booking.date}}</p>
+      <p>Bokad av: {{booking.firstName}} {{booking.lastName}}</p>
+      <p>Adress för städning:
+        {{booking.streetName}},
+        {{booking.postalCode}}
+        {{booking.city}}</p>
+      <p>Typ av städning: {{booking.cleaningOption}}</p>
+      {{#if customerLoggedIn}}
+        <p>Ditt meddelande: {{booking.message}}</p>
+      {{else}}
+        <p>Kundens meddelande: {{booking.message}}</p>
+      {{/if}}
+      <p>Status: {{booking.status}}</p>
+    </div>
+
+    {{#if customerLoggedIn}}
+      {{#if cancelBooking}}
+        <form action="/din-bokning/{{booking._id}}/avboka" method="post">
+          <input type="submit" value="Avboka" />
+        </form>
+      {{/if}}
+    {{else}}
+      <form
+        action="/kundbokning/{{booking._id}}/tilldela-stadare"
+        method="post"
+      >
+        <label for="selectCleaner">Välj en städare:</label>
+        <select name="assignedTo" id="selectCleaner">
+          {{#each cleaners}}
+            <option value="{{_id}}">{{firstName}}</option>
+          {{/each}}
+          <input type="submit" value="Tilldela städning" />
+        </select>
+      </form>
+    {{/if}}
 
   </div>
   <form action="/din-bokning/{{_id}}/avboka" method="post">

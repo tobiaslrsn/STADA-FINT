@@ -3,7 +3,7 @@ const utils = require("../utils");
 const CustomersModel = require("../models/CustomersModel");
 const BookingsModel = require("../models/BookingsModel");
 const middlewares = require("../middlewares/auth");
-const { send } = require("express/lib/response");
+const CleanersModel = require("../models/CleanersModel");
 
 const router = express.Router();
 
@@ -86,6 +86,8 @@ router.post("/boka-stadning", async (req, res) => {
 
 // VIEW BOOKINGS
 
+// CUSTOMER
+
 router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
   const customer = await CustomersModel.findById(res.locals.customerId)
     .populate("bookings")
@@ -96,12 +98,26 @@ router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
   res.render("bookings/all-bookings", { bookings });
 });
 
+// ADMIN
+
+router.get("/kundbokningar", async (req, res) => {
+  const customers = await CustomersModel.find().populate("bookings").lean();
+
+  res.render("bookings/all-bookings", { customers });
+});
+
 // VIEW SINGLE BOOKING
 
+// CUSTOMER
+
 router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
-  const booking = await BookingsModel.findById(req.params.id);
-  // vill få till error om man skriver in fel id
-  res.render("bookings/single-booking", booking);
+  const booking = await BookingsModel.findById(req.params.id).lean();
+
+  if (booking.status === "Bokad") {
+    res.render("bookings/single-booking", { booking, cancelBooking: true });
+  } else {
+    res.render("bookings/single-booking", { booking });
+  }
 });
 
 router.post("/din-bokning/:id/avboka", async (req, res) => {
@@ -111,6 +127,29 @@ router.post("/din-bokning/:id/avboka", async (req, res) => {
   await booking.save();
 
   res.redirect("/din-bokning/" + req.params.id);
+});
+
+// ADMIN
+
+router.get("/kundbokning/:id", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id).lean();
+  const cleaners = await CleanersModel.find().lean();
+
+  res.render("bookings/single-booking", { booking, cleaners });
+});
+
+router.post("/kundbokning/:id/tilldela-stadare", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id);
+
+  booking.assignedTo = req.body.assignedTo;
+  booking.status = "Bekräftad";
+  await booking.save();
+
+  const cleaner = await CleanersModel.findById(req.body.assignedTo);
+  cleaner.bookings.push(booking);
+  await cleaner.save();
+
+  res.redirect("/kundbokning/" + req.params.id);
 });
 
 module.exports = router;
