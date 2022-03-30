@@ -3,6 +3,7 @@ const utils = require("../utils");
 const CustomersModel = require("../models/CustomersModel");
 const BookingsModel = require("../models/BookingsModel");
 const middlewares = require("../middlewares/auth");
+const { send } = require("express/lib/response");
 
 const router = express.Router();
 
@@ -99,7 +100,7 @@ router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
 
 router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
   const booking = await BookingsModel.findById(req.params.id);
-
+  // vill få till error om man skriver in fel id
   res.render("bookings/single-booking", booking);
 });
 
