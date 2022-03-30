@@ -871,6 +871,7 @@ input:hover[type=submit] {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 3rem;
 }
 @media (max-width: 768px) {
   .bookings-container {
@@ -979,6 +980,20 @@ input:hover[type=submit] {
   border-radius: 10px;
   margin-bottom: 0.5rem;
   cursor: pointer;
+}
+
+.assign-cleaner {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 3rem;
+}
+.assign-cleaner input {
+  width: 100%;
+  display: flex;
+}
+.assign-cleaner .submit-btn {
+  width: 10rem;
 }
 
 .error-container {

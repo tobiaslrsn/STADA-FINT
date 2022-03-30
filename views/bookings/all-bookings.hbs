@@ -1,32 +1,41 @@
 <div class="bookings-container">
-  {{#each bookings}}
-    <div class="bookings">
-      <p>Datum för städning: {{formatDate date}}</p>
-      <p>Bokad av: {{firstName}} {{lastName}}</p>
-      <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
-      <p>Typ av städning: {{cleaningOption}}</p>
-      <p>Status: {{status}}</p>
-      <p>Meddelande: {{message}}</p>
-      <a href="/din-bokning/{{_id}}">Hantera bokning</a>
-
-    </div>
-  {{/each}}
-</div>
-{{#if adminLoggedIn}}
-  {{#each customers}}
+  {{#if customerLoggedIn}}
     {{#each bookings}}
       <div class="bookings">
-        <p>Datum för städning: {{date}}</p>
+        <p>Datum för städning: {{formatDate date}}</p>
         <p>Bokad av: {{firstName}} {{lastName}}</p>
         <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
         <p>Typ av städning: {{cleaningOption}}</p>
         <p>Status: {{status}}</p>
-        <a href="/kundbokning/{{_id}}">Hantera bokning</a>
+        <p>Meddelande: {{message}}</p>
+        <a href="/din-bokning/{{_id}}">Hantera bokning</a>
+
       </div>
     {{/each}}
-  {{/each}}
-{{/if}}
+  {{/if}}
 
-<style>
-  .bookings { margin-top: 75px; }
-</style>
+  {{#if adminLoggedIn}}
+    {{#each customers}}
+      {{#each bookings}}
+        <div class="bookings">
+          <p>Datum för städning: {{formatDate date}}</p>
+          <p>Bokad av: {{firstName}} {{lastName}}</p>
+          <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
+          <p>Typ av städning: {{cleaningOption}}</p>
+          <p>Status: {{status}}</p>
+          <a href="/kundbokning/{{_id}}">Hantera bokning</a>
+        </div>
+      {{/each}}
+    {{/each}}
+  {{/if}}
+
+  {{#if cleanerLoggedIn}}
+    {{#each customers}}
+      {{#each bookings}}
+        <div class="bookings">
+          {{!  LÄGG STÄDARE HÄR }}
+        </div>
+      {{/each}}
+    {{/each}}
+  {{/if}}
+</div>

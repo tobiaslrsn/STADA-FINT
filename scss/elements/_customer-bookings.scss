@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 3rem;
 
   @include for-phone-only {
     flex-direction: column;
@@ -120,3 +121,17 @@
 }
 
 // !SINGLE BOOKING
+
+.assign-cleaner {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 3rem;
+  input {
+    width: 100%;
+    display: flex;
+  }
+  .submit-btn {
+    width: 10rem;
+  }
+}

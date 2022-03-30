@@ -2,6 +2,7 @@ const express = require("express");
 const utils = require("../utils");
 const CustomersModel = require("../models/CustomersModel");
 const BookingsModel = require("../models/BookingsModel");
+
 const middlewares = require("../middlewares/auth");
 const CleanersModel = require("../models/CleanersModel");
 
@@ -151,5 +152,4 @@ router.post("/kundbokning/:id/tilldela-stadare", async (req, res) => {
 
   res.redirect("/kundbokning/" + req.params.id);
 });
-
 module.exports = router;
