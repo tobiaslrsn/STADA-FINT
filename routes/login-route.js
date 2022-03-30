@@ -68,7 +68,7 @@ router.post("/logga-in-stadare", async (req, res) => {
   CleanersModel.findOne({ email }, async (err, cleaner) => {
     if (cleaner && utils.comparePassword(password, cleaner.password)) {
       const cleanerData = {
-        cleaner: cleaner._id,
+        cleanerId: cleaner._id,
         firstName: cleaner.firstName,
         email,
       };

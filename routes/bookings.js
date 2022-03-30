@@ -1,10 +1,11 @@
+// MODULES
+
 const express = require("express");
 const utils = require("../utils");
 const CustomersModel = require("../models/CustomersModel");
 const BookingsModel = require("../models/BookingsModel");
-
-const middlewares = require("../middlewares/auth");
 const CleanersModel = require("../models/CleanersModel");
+const middlewares = require("../middlewares/auth");
 
 const router = express.Router();
 
@@ -111,6 +112,27 @@ router.get("/kundbokningar", async (req, res) => {
   res.render("bookings/all-bookings", { customers });
 });
 
+// CLEANER
+
+router.get("/dina-uppdrag", async (req, res) => {
+  const cleaner = await CleanersModel.findById(res.locals.cleanerId)
+    .populate("bookings")
+    .lean();
+
+  const bookings = cleaner.bookings;
+
+  res.render("bookings/all-bookings", { bookings, completeBooking: true });
+});
+
+router.post("/uppdrag/:id/rapportera-klar", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id);
+
+  booking.status = "Genomförd";
+  await booking.save();
+
+  res.redirect("back");
+});
+
 // VIEW SINGLE BOOKING
 
 // CUSTOMER
@@ -156,4 +178,5 @@ router.post("/kundbokning/:id/tilldela-stadare", async (req, res) => {
 
   res.redirect("/kundbokning/" + req.params.id);
 });
+
 module.exports = router;
