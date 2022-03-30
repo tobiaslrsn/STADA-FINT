@@ -80,7 +80,7 @@ router.post("/boka-stadning", async (req, res) => {
     customer.bookings.push(newBooking);
     customer.save();
 
-    res.redirect("/");
+    res.redirect("/dina-bokningar");
   }
 });
 

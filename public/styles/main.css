@@ -472,7 +472,11 @@ input:hover[type=submit] {
 }
 @media (max-width: 768px) {
   .logo-container-corner {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
   }
 }
 
@@ -683,6 +687,7 @@ input:hover[type=submit] {
     padding-top: 4rem;
     margin-bottom: 10rem;
     padding: 1rem;
+    padding-top: 3rem;
   }
 }
 .booking-wrapper .booking-container .booking-form form {
@@ -1011,7 +1016,7 @@ body .bubbles {
   z-index: -1;
 }
 body .bubble {
-  position: absolute;
+  position: fixed;
   bottom: -100px;
   width: 40px;
   height: 40px;
