@@ -9,20 +9,20 @@
   </div>
 {{/each}}
 
-{{!-- {{#if adminLoggedIn}} --}}
-{{#each customers}}
-  {{#each bookings}}
-    <div class="bookings">
-      <p>Datum för städning: {{date}}</p>
-      <p>Bokad av: {{firstName}} {{lastName}}</p>
-      <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
-      <p>Typ av städning: {{cleaningOption}}</p>
-      <p>Status: {{status}}</p>
-      <a href="/din-bokning/{{_id}}">Hantera bokning</a>
-    </div>
+{{#if adminLoggedIn}}
+  {{#each customers}}
+    {{#each bookings}}
+      <div class="bookings">
+        <p>Datum för städning: {{date}}</p>
+        <p>Bokad av: {{firstName}} {{lastName}}</p>
+        <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
+        <p>Typ av städning: {{cleaningOption}}</p>
+        <p>Status: {{status}}</p>
+        <a href="/kundbokning/{{_id}}">Hantera bokning</a>
+      </div>
+    {{/each}}
   {{/each}}
-{{/each}}
-{{!-- {{/if}} --}}
+{{/if}}
 
 <style>
   .bookings { margin-top: 75px; }

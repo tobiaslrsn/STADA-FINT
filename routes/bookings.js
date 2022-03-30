@@ -3,6 +3,7 @@ const utils = require("../utils");
 const CustomersModel = require("../models/CustomersModel");
 const BookingsModel = require("../models/BookingsModel");
 const middlewares = require("../middlewares/auth");
+const CleanersModel = require("../models/CleanersModel");
 
 const router = express.Router();
 
@@ -102,17 +103,21 @@ router.get("/dina-bokningar", middlewares.forceAuthorize, async (req, res) => {
 router.get("/kundbokningar", async (req, res) => {
   const customers = await CustomersModel.find().populate("bookings").lean();
 
-  const bookings = customers.bookings;
-
   res.render("bookings/all-bookings", { customers });
 });
 
 // VIEW SINGLE BOOKING
 
-router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
-  const booking = await BookingsModel.findById(req.params.id);
+// CUSTOMER
 
-  res.render("bookings/single-booking", booking);
+router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id).lean();
+
+  if (booking.status === "Bokad") {
+    res.render("bookings/single-booking", { booking, cancelBooking: true });
+  }
+
+  res.render("bookings/single-booking", { booking });
 });
 
 router.post("/din-bokning/:id/avboka", async (req, res) => {
@@ -122,6 +127,30 @@ router.post("/din-bokning/:id/avboka", async (req, res) => {
   await booking.save();
 
   res.redirect("/din-bokning/" + req.params.id);
+});
+
+// ADMIN
+
+router.get("/kundbokning/:id", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id).lean();
+  const cleaners = await CleanersModel.find().lean();
+
+  res.render("bookings/single-booking", { booking, cleaners });
+});
+
+router.post("/kundbokning/:id/tilldela-stadare", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id);
+
+  booking.assignedTo = req.body.assignedTo;
+  booking.status = "Bekräftad";
+  await booking.save();
+
+  const cleaner = await CleanersModel.findById(req.body.assignedTo);
+  cleaner.bookings.push(booking);
+  await cleaner.save();
+
+  console.log(cleaner);
+  res.redirect("/kundbokning/" + req.params.id);
 });
 
 module.exports = router;
