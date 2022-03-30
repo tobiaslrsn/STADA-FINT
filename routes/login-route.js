@@ -42,9 +42,9 @@ router.post("/logga-in", async (req, res) => {
       res.cookie("customerToken", accessToken);
 
       await customer.save();
+
       res.redirect("/");
-    }
-    if (email !== " " && utils.validateEmailAddress(email) === -1) {
+    } else if (email !== " " && utils.validateEmailAddress(email) === -1) {
       res.render("accounts/login", {
         emailWrongFormat: "adressen har fel format.",
       });
