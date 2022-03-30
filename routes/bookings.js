@@ -80,7 +80,7 @@ router.post("/boka-stadning", async (req, res) => {
     customer.bookings.push(newBooking);
     customer.save();
 
-    res.redirect("/");
+    res.redirect("/dina-bokningar");
   }
 });
 
@@ -115,9 +115,9 @@ router.get("/din-bokning/:id", middlewares.forceAuthorize, async (req, res) => {
 
   if (booking.status === "Bokad") {
     res.render("bookings/single-booking", { booking, cancelBooking: true });
+  } else {
+    res.render("bookings/single-booking", { booking });
   }
-
-  res.render("bookings/single-booking", { booking });
 });
 
 router.post("/din-bokning/:id/avboka", async (req, res) => {
@@ -149,7 +149,6 @@ router.post("/kundbokning/:id/tilldela-stadare", async (req, res) => {
   cleaner.bookings.push(booking);
   await cleaner.save();
 
-  console.log(cleaner);
   res.redirect("/kundbokning/" + req.params.id);
 });
 
