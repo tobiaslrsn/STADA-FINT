@@ -6,7 +6,7 @@ const forceAuthorize = (req, res, next) => {
   if (customerToken && jwt.verify(customerToken, process.env.JWT_CUSTOMER)) {
     next();
   } else {
-    res.sendStatus(401); // Redirect till någon error.hbs
+    res.redirect("/");
   }
 };
 

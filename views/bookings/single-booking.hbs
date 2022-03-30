@@ -9,19 +9,21 @@
     </div>
 
     <div class="single-booking-container">
-      <p><span>Datum för städning:</span> {{formatDate date}}</p>
-      <p><span>Bokad av:</span> {{firstName}} {{lastName}}</p>
+      <p><span>Datum för städning:</span> {{formatDate booking.date}}</p>
+      <p><span>Bokad av:</span> {{booking.firstName}} {{lbooking.astName}}</p>
       <p><span>Adress för städning:</span>
-        {{streetName}},
-        {{postalCode}}
-        {{city}}</p>
-      <p><span>Typ av städning:</span> {{cleaningOption}}</p>
+        {{booking.streetName}},
+        {{booking.postalCode}}
+        {{booking.city}}</p>
+      <p><span>Typ av städning:</span> {{booking.cleaningOption}}</p>
       <p><span>Ditt meddelande:</span>
-        {{#if message}} {{message}} {{else}} Inga önskemål {{/if}}</p>
-      <p><span>Status: </span>{{status}}</p>
+        {{#if booking.message}} {{booking.message}} {{else}}
+          Inga önskemål
+        {{/if}}</p>
+      <p><span>Status: </span>{{booking.status}}</p>
 
     </div>
-    <form action="/din-bokning/{{_id}}/avboka" method="post">
+    <form action="/din-bokning/{{booking._id}}/avboka" method="post">
       <input type="submit" value="Avboka" />
     </form>
   </div>

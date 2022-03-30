@@ -8,6 +8,10 @@ const CleanersModel = require("../models/CleanersModel");
 
 const router = express.Router();
 
+router.get("/betalning", middlewares.forceAuthorize, (req, res) => {
+  res.render("bookings/payment");
+});
+
 // BOOKING VIEW
 
 router.get("/boka-stadning", async (req, res) => {
