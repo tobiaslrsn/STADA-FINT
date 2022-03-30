@@ -29,6 +29,12 @@ app.engine(
   exphbs.engine({
     extname: ".hbs",
     defaultLayout: "main",
+    helpers: {
+      formatDate: (postDate) => {
+        const date = new Date(postDate);
+        return date.toLocaleDateString();
+      },
+    },
   })
 );
 
@@ -89,6 +95,10 @@ app.use(loginRoutes);
 app.use(accountRoutes);
 app.use(bookingRoutes);
 app.use(cleanerSchedule);
+
+app.use("/", (req, res) => {
+  res.status(404).render("errors/error");
+});
 
 app.listen(8080, () => {
   console.log("/// RUNNING ON: http://localhost:8080");

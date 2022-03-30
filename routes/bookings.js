@@ -8,7 +8,7 @@ const router = express.Router();
 
 // BOOKING VIEW
 
-router.get("/boka-stadning", (req, res) => {
+router.get("/boka-stadning", async (req, res) => {
   res.render("bookings/booking");
 });
 

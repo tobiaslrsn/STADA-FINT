@@ -23,7 +23,7 @@
       <div class="service">
         {{#if customerLoggedIn}}
           <h2>Välkommen till Städa Fint</h2>
-          <p>Behöver du städhjälp? Boka här!</p>
+          <p>Behöver du städhjälp? <a href="/boka-stadning">Boka här!</a></p>
 
         {{else}}
           {{#if cleanerLoggedIn}}
@@ -32,8 +32,11 @@
 
           {{else}}
             <h2>Välkommen till Städa Fint!</h2>
-            <p>Klicka här för att bli ny kund och lägga bokning</p>
-
+            {{! <p>Klicka här för att bli ny kund och lägga bokning</p> }}
+            <div class="login-register-homepage">
+              <p><a href="/logga-in">Logga in</a></p>
+              <p><a href="/registrera-konto">Registrera</a></p>
+            </div>
           {{/if}}
         {{/if}}
 

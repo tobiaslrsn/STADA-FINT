@@ -28,16 +28,17 @@
     <div class="reg-admin-container">
       <h2>Ny admin</h2>
       <form action="/admin/register" method="post">
-        <input type="number" name="adminUsername" placeholder="Admin ID" /><br
-        />
-        <p class="error"> {{usernameLengthError}} </p>
-        <input type="password" name="adminPassword" placeholder="Lösenord" /><br
-        />
+        <input type="number" name="adminUsername" placeholder="Admin ID" />
+
+        <p class="error">{{userNameTaken}} {{usernameLengthError}}</p>
+
+        <input type="password" name="adminPassword" placeholder="Lösenord" />
+
         <input
           type="password"
           name="adminPasswordConfirm"
           placeholder="Bekräfta lösenord"
-        /><br />
+        />
         <input type="submit" value="Registrera konto" />
       </form>
     </div>

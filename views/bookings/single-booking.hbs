@@ -1,20 +1,21 @@
-<div class="bookings">
-  <p>Här kan du se detaljerna kring din bokning. Om det är något som inte
-    stämmer så kan du avboka och
-    <a href="/boka-stadning">boka på nytt.</a></p>
-  <br />
-  <p>Datum för städning: {{date}}</p>
-  <p>Bokad av: {{firstName}} {{lastName}}</p>
-  <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
-  <p>Typ av städning: {{cleaningOption}}</p>
-  <p>Ditt meddelande: {{message}}</p>
-  <p>Status: {{status}}</p>
+<p>Här kan du se detaljerna kring din bokning. Om det är något som inte stämmer
+  så kan du avboka och
+  <a href="/boka-stadning">boka på nytt.</a></p>
+<br />
+<div class="bookings-container">
+  <div class="bookings">
+    <p>Datum för städning: {{date}}</p>
+    <p>Bokad av: {{firstName}} {{lastName}}</p>
+    <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
+    <p>Typ av städning: {{cleaningOption}}</p>
+    <p>Ditt meddelande: {{message}}</p>
+    <p>Status: {{status}}</p>
+  </div>
+
+  <form action="/din-bokning/{{_id}}/avboka" method="post">
+    <input type="submit" value="Avboka" />
+  </form>
 </div>
-
-<form action="/din-bokning/{{_id}}/avboka" method="post">
-  <input type="submit" value="Avboka" />
-</form>
-
 <style>
   .bookings { margin-top: 100px; }
 </style>

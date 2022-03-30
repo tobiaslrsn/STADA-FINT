@@ -12,12 +12,12 @@ const { objectId } = require("mongodb");
 
 router.get("/register", async (req, res) => {
   //HÅRKODAD ADMIN
-  /*   const test = new AdminModel({
-    adminUsername: "username",
+  /* const test = new AdminModel({
+    adminUsername: "208127",
     adminPassword: utils.getHashedPassword("password"),
   });
   await test.save();
-  res.send(test);*/
+  res.send(test); */
   res.render("accounts/admin");
 });
 
@@ -27,7 +27,9 @@ router.post("/register", async (req, res) => {
 
   AdminModel.findOne({ adminUsername }, async (err, admin) => {
     if (admin) {
-      res.send("TAKEN");
+      res.render("accounts/admin", {
+        userNameTaken: "Användarnamnet är upptaget.",
+      });
     } else if (adminUsername.length < 6 || adminUsername.length > 6) {
       // res.send("ADMIN USERNAME NEEDS TO BE MORE THAN 6");
       res.render("accounts/admin", {

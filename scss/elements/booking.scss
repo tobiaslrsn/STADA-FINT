@@ -50,9 +50,12 @@
       padding-top: 2rem;
       background: white;
       margin-bottom: 2rem;
+      padding-top: 2rem;
+      margin-top: 1rem;
       @include for-phone-only {
         padding-top: 4rem;
         margin-bottom: 10rem;
+        padding: 1rem;
       }
 
       form {
@@ -125,6 +128,7 @@
           width: 100%;
           margin-top: 0.6rem;
           height: 60%;
+          padding: 1rem;
         }
       }
 

@@ -1,0 +1,39 @@
+.bookings-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  @include for-phone-only {
+    flex-direction: column;
+  }
+
+  .bookings {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 40%;
+    height: 25rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+
+    @include for-phone-only {
+      width: 80%;
+    }
+
+    a {
+      border: $background-color;
+      padding: 0.5rem;
+      border-radius: 10px;
+      background-color: #899f7f;
+      color: black;
+    }
+    a:hover {
+      background-color: $background-color;
+      text-decoration: none;
+    }
+  }
+}

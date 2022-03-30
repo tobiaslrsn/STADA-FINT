@@ -33,7 +33,7 @@
           <button class="dropbtn">Dropdown</button>
           <div class="dropdown-content">
             <a href="/">Hem</a>
-            <a href="/boka-stadning">Boka städning</a>
+            {{! <a href="/boka-stadning">Boka städning</a> }}
             <a href="/registrera-konto">Registrera kundkonto</a>
             <a href="/registrera-stadare">Registrera städare</a>
 
@@ -66,8 +66,8 @@
     <ul>
 
       {{#if cleanerLoggedIn}}
+        <li> <a href="/">Hem</a></li>
         <li><a href="#SCHEMA"></a></li>
-
         <form action="/log-out" method="post">
           <input type="submit" value="Logga ut" class="logout-btn" />
         </form>
@@ -84,7 +84,7 @@
           {{#if adminLoggedIn}}
 
             <li> <a href="/">Hem</a></li>
-            <li><a href="/boka-stadning">Boka städning</a></li>
+            {{! <li><a href="/boka-stadning">Boka städning</a></li> }}
             <li><a href="/registrera-konto">Registrera kundkonto</a></li>
             <li><a href="/registrera-stadare">Registrera städare</a></li>
             <form action="/log-out" method="post">
@@ -94,6 +94,7 @@
           {{else}}
 
             {{! UTLOGGAD }}
+            <li> <a href="/">Hem</a></li>
             <li><a href="/logga-in">Logga in</a></li>
             <li><a href="/registrera-konto">Registrera kundkonto</a></li>
             <li><a href="#contact">Kontakt</a></li>
