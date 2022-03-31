@@ -7,9 +7,17 @@
         <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
         <p>Typ av städning: {{cleaningOption}}</p>
         <p>Status: {{status}}</p>
-        <p>Meddelande: {{message}}</p>
+        <p>
+          <span>
+            Ditt meddelande:
+          </span>
+          {{#if message}}
+            {{message}}
+          {{else}}
+            Inga önskemål
+          {{/if}}
+        </p>
         <a href="/din-bokning/{{_id}}">Hantera bokning</a>
-
       </div>
     {{/each}}
   {{/if}}
@@ -30,12 +38,20 @@
   {{/if}}
 
   {{#if cleanerLoggedIn}}
-    {{#each customers}}
-      {{#each bookings}}
-        <div class="bookings">
-          {{!  LÄGG STÄDARE HÄR }}
-        </div>
-      {{/each}}
+    {{#each bookings}}
+      <div class="bookings">
+        <p>Datum för städning: {{formatDate date}}</p>
+        <p>Bokad av: {{firstName}} {{lastName}}</p>
+        <p>Adress för städning: {{streetName}}, {{postalCode}} {{city}}</p>
+        <p>Typ av städning: {{cleaningOption}}</p>
+        <p>Status: {{status}}</p>
+        {{!-- <a href="/uppdrag/{{_id}}">Hantera uppdrag</a> --}}
+        {{#if ../completeBooking}}
+          <form action="/uppdrag/{{_id}}/rapportera-klar" method="post">
+            <input type="submit" value="Klar" />
+          </form>
+        {{/if}}
+      </div>
     {{/each}}
   {{/if}}
 </div>

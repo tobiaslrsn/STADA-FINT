@@ -21,69 +21,52 @@
           Inga önskemål
         {{/if}}</p>
       <p><span>Status: </span>{{booking.status}}</p>
-
     </div>
-    <form action="/din-bokning/{{booking._id}}/avboka" method="post">
-      <input type="submit" value="Avboka" />
-    </form>
+    {{#if cancelBooking}}
+      <form action="/din-bokning/{{booking._id}}/avboka" method="post">
+        <input type="submit" value="Avboka" />
+      </form>
+    {{/if}}
   </div>
-{{/if}}
-
-{{#if adminLoggedIn}}
+{{else}}
   <div class="single-booking-wrapper">
     <div class="single-booking-header">
-      <h4>
-        Här kan du se detaljerna kring din bokning.
-      </h4>
+      <h4>Kundens bokningsdetaljer</h4>
       <p>Om det är något som inte stämmer så kan du avboka och
-        <a href="/boka-stadning">boka på nytt.</a></p>
+        <a href="/boka-stadning">boka på nytt.</a>
+      </p>
     </div>
     <div class="single-booking-container">
-
       <p>Kundens bokningsdetaljer</p>
-
-      <p>Datum för städning: {{booking.date}}</p>
+      <p>Datum för städning: {{formatDate booking.date}}</p>
       <p>Bokad av: {{booking.firstName}} {{booking.lastName}}</p>
       <p>Adress för städning:
         {{booking.streetName}},
         {{booking.postalCode}}
         {{booking.city}}</p>
       <p>Typ av städning: {{booking.cleaningOption}}</p>
-
-      {{#if customerLoggedIn}}
-        <p>Ditt meddelande: {{booking.message}}</p>
-      {{else}}
-        {{#if adminLoggedIn}}
-          <p>Kundens meddelande: {{booking.message}}</p>
-        {{/if}}
-      {{/if}}
-
+      <p>Kundens meddelande: {{booking.message}}</p>
       <p>Status: {{booking.status}}</p>
     </div>
-    <form
-      action="/kundbokning/{{booking._id}}/tilldela-stadare"
-      method="post"
-      class="assign-cleaner"
-    >
-      <label for="selectCleaner">Välj en städare:</label>
-      <select name="assignedTo" id="selectCleaner">
-        {{#each cleaners}}
-          <option value="{{_id}}">{{firstName}}</option>
-        {{/each}}
-        <input type="submit" value="Tilldela städning" class="submit-btn" />
-      </select>
-
-    </form>
+    {{#if adminLoggedIn}}
+      <form
+        action="/kundbokning/{{booking._id}}/tilldela-stadare"
+        method="post"
+        class="assign-cleaner"
+      >
+        <label for="selectCleaner">Välj en städare:</label>
+        <select name="assignedTo" id="selectCleaner">
+          {{#each cleaners}}
+            <option value="{{_id}}">{{firstName}}</option>
+          {{/each}}
+          <input type="submit" value="Tilldela städning" class="submit-btn" />
+        </select>
+      </form>
+    {{/if}}
+    {{#if completeBooking}}
+      <form action="/uppdrag/{{booking._id}}/rapportera-klar" method="post">
+        <input type="submit" value="Klar" />
+      </form>
+    {{/if}}
   </div>
-{{else}}
-
-  {{#if cancelBooking}}
-    <form action="/din-bokning/{{booking._id}}/avboka" method="post">
-      <input type="submit" value="Avboka" />
-    </form>
-
-  {{/if}}{{/if}}
-
-{{!-- <form action="/din-bokning/{{_id}}/avboka" method="post">
-  <input type="submit" value="Avboka" />
-</form> --}}
+{{/if}}
