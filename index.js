@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 
 // ROUTES
+const service = require("./routes/service.js");
 const adminRoute = require("./routes/admin-route.js");
 const loginRoutes = require("./routes/login-route.js");
 const accountRoutes = require("./routes/accounts");
@@ -89,6 +90,7 @@ app.use(loginRoutes);
 app.use(accountRoutes);
 app.use(bookingRoutes);
 app.use(cleanerSchedule);
+app.use(service);
 
 app.listen(8080, () => {
   console.log("/// RUNNING ON: http://localhost:8080");

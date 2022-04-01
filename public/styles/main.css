@@ -961,6 +961,17 @@ input:hover[type=submit] {
   }
 }
 
+.tjanster {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 30px;
+  list-style-type: none;
+  margin: 30px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
